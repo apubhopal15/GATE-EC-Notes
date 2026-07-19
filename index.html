@@ -3,50 +3,98 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Rishi GATE EC Resources</title>
+  <title>Rishi GATE EC Practice Hub</title>
   <style>
     :root {
-      color-scheme: light;
-      --bg: #f6f8fb;
+      --bg: #f5f7fb;
       --panel: #ffffff;
-      --text: #18212f;
-      --muted: #5d6878;
-      --line: #d7dee8;
-      --blue: #155eef;
+      --ink: #172033;
+      --muted: #5f6b7c;
+      --line: #d9e1ec;
+      --blue: #1457d9;
+      --blue-dark: #0b3f9c;
       --green: #087443;
-      --amber: #b54708;
+      --orange: #b54708;
+      --red: #b42318;
+      --soft-blue: #eaf1ff;
+      --soft-green: #ecfdf3;
+      --soft-orange: #fff7ed;
     }
     * { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
       background: var(--bg);
-      color: var(--text);
-      line-height: 1.5;
+      line-height: 1.48;
     }
     header {
-      background: #111827;
-      color: #fff;
-      padding: 28px 18px;
+      background: #101828;
+      color: #ffffff;
+      border-bottom: 4px solid var(--blue);
     }
-    main {
-      max-width: 1040px;
+    .wrap {
+      width: min(1120px, calc(100% - 32px));
       margin: 0 auto;
-      padding: 22px 18px 44px;
+    }
+    .hero {
+      padding: 30px 0 24px;
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 22px;
+      align-items: end;
     }
     h1, h2, h3 { margin: 0; }
-    h1 { font-size: clamp(28px, 4vw, 42px); }
-    h2 { font-size: 22px; margin-bottom: 12px; }
-    p { margin: 8px 0 0; color: var(--muted); }
-    .top {
-      max-width: 1040px;
-      margin: 0 auto;
+    h1 {
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+    h2 {
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+    h3 {
+      font-size: 17px;
+      margin-bottom: 6px;
+    }
+    p { margin: 7px 0 0; color: var(--muted); }
+    header p { color: #cfd7e6; }
+    main { padding: 22px 0 46px; }
+    section { margin-top: 22px; }
+    .hero-box {
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 8px;
+      padding: 16px;
+      background: rgba(255,255,255,0.06);
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    a.button {
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 14px;
+      border-radius: 8px;
+      background: var(--blue);
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 700;
+    }
+    a.button:hover { background: var(--blue-dark); }
+    a.button.light {
+      background: #ffffff;
+      color: var(--blue);
     }
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 14px;
-      margin-top: 18px;
     }
     .card {
       background: var(--panel);
@@ -54,34 +102,31 @@
       border-radius: 8px;
       padding: 16px;
     }
-    .link-card {
+    a.card {
       display: block;
+      min-height: 128px;
       color: inherit;
       text-decoration: none;
-      min-height: 112px;
     }
-    .link-card:hover {
+    a.card:hover {
       border-color: var(--blue);
-      box-shadow: 0 8px 20px rgba(21, 94, 239, 0.10);
+      box-shadow: 0 8px 22px rgba(20, 87, 217, 0.12);
     }
-    .link-card strong {
-      display: block;
-      font-size: 17px;
-      margin-bottom: 8px;
-    }
-    .badge {
-      display: inline-block;
-      border-radius: 999px;
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
       padding: 3px 9px;
+      border-radius: 999px;
       font-size: 12px;
       font-weight: 700;
-      margin-bottom: 10px;
-      color: #fff;
+      color: #ffffff;
       background: var(--blue);
+      margin-bottom: 10px;
     }
-    .badge.green { background: var(--green); }
-    .badge.amber { background: var(--amber); }
-    section { margin-top: 22px; }
+    .tag.green { background: var(--green); }
+    .tag.orange { background: var(--orange); }
+    .tag.red { background: var(--red); }
     table {
       width: 100%;
       border-collapse: collapse;
@@ -92,151 +137,199 @@
     }
     th, td {
       text-align: left;
+      vertical-align: top;
       padding: 12px;
       border-bottom: 1px solid var(--line);
-      vertical-align: top;
     }
-    th { background: #eef3f8; }
+    th { background: #edf3fb; }
     tr:last-child td { border-bottom: 0; }
-    .note {
-      border-left: 4px solid var(--amber);
-      background: #fff7ed;
+    .band {
+      border-left: 4px solid var(--blue);
+      background: var(--soft-blue);
     }
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 14px;
+    .band.green {
+      border-left-color: var(--green);
+      background: var(--soft-green);
     }
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 42px;
-      padding: 10px 14px;
-      border-radius: 8px;
-      background: var(--blue);
-      color: #fff;
-      text-decoration: none;
-      font-weight: 700;
+    .band.orange {
+      border-left-color: var(--orange);
+      background: var(--soft-orange);
     }
-    .button.secondary {
-      background: #fff;
-      color: var(--blue);
-      border: 1px solid var(--blue);
+    .list {
+      margin: 8px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+    .list li { margin-top: 4px; }
+    code {
+      background: #eef2f7;
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: #111827;
+    }
+    footer {
+      color: var(--muted);
+      padding: 18px 0 28px;
+      border-top: 1px solid var(--line);
+    }
+    @media (max-width: 760px) {
+      .hero { grid-template-columns: 1fr; }
+      .wrap { width: min(100% - 24px, 1120px); }
+      th, td { padding: 10px; }
     }
   </style>
 </head>
 <body>
   <header>
-    <div class="top">
-      <h1>Rishi GATE EC Resources</h1>
-      <p>One clean place for GATE EC study links, daily test rules, and answer analysis workflow.</p>
-      <div class="actions">
-        <a class="button" href="https://docs.google.com/spreadsheets/d/1gaTieT4arZ0mUdVW6MJLN11V7LkMjGGsEkYHTUKEIfA/edit" target="_blank" rel="noopener">Open One Book</a>
-        <a class="button secondary" href="https://drive.google.com/drive/folders/18Bcx13cVUBgZFMoiPenZg6zMsZXfKcHS" target="_blank" rel="noopener">Open Master Drive</a>
+    <div class="wrap hero">
+      <div>
+        <h1>Rishi GATE EC Practice Hub</h1>
+        <p>Daily GATE EC style MCQ practice, source folders, one-book tracking, and answer analysis in one place.</p>
+        <div class="actions">
+          <a class="button" href="https://docs.google.com/spreadsheets/d/1gaTieT4arZ0mUdVW6MJLN11V7LkMjGGsEkYHTUKEIfA/edit" target="_blank" rel="noopener">Open One Book</a>
+          <a class="button light" href="https://drive.google.com/drive/folders/18Bcx13cVUBgZFMoiPenZg6zMsZXfKcHS" target="_blank" rel="noopener">Open Master Drive</a>
+        </div>
+      </div>
+      <div class="hero-box">
+        <span class="tag green">Daily Rule</span>
+        <h2>33 Questions</h2>
+        <p>5 Aptitude + 4 Engineering Mathematics + 24 EC Technical. Main format: MCQ. Level: GATE EC or slightly above.</p>
       </div>
     </div>
   </header>
 
-  <main>
+  <main class="wrap">
     <section>
-      <h2>Study Resources</h2>
+      <h2>Open Direct Resources</h2>
       <div class="grid">
-        <a class="card link-card" href="https://drive.google.com/drive/folders/18Bcx13cVUBgZFMoiPenZg6zMsZXfKcHS" target="_blank" rel="noopener">
-          <span class="badge green">Drive</span>
-          <strong>Master Drive Folder</strong>
-          <span>All uploaded EC resources in one parent folder.</span>
+        <a class="card" href="https://drive.google.com/drive/folders/18Bcx13cVUBgZFMoiPenZg6zMsZXfKcHS" target="_blank" rel="noopener">
+          <span class="tag green">Drive</span>
+          <h3>Master Drive Folder</h3>
+          <p>Main uploaded folder for EC resources. Use study material only for students.</p>
         </a>
-        <a class="card link-card" href="https://drive.google.com/drive/folders/1YPQ1Skysc9HHhj5ITNHiJ-mhhkPNQiQn" target="_blank" rel="noopener">
-          <span class="badge green">Drive</span>
-          <strong>GATE 2025 Study Resources</strong>
-          <span>Latest uploaded GATE 2025 material folder.</span>
+        <a class="card" href="https://drive.google.com/drive/folders/1YPQ1Skysc9HHhj5ITNHiJ-mhhkPNQiQn" target="_blank" rel="noopener">
+          <span class="tag green">Drive</span>
+          <h3>GATE 2025 Study Resources</h3>
+          <p>Latest GATE 2025 resource folder.</p>
         </a>
-        <a class="card link-card" href="https://drive.google.com/drive/folders/1f5PcdEMynTs3O8RmMTPTNJzJ48zM4V6A" target="_blank" rel="noopener">
-          <span class="badge green">Drive</span>
-          <strong>Gate 2025 Folder</strong>
-          <span>Question paper and latest GATE files.</span>
+        <a class="card" href="https://drive.google.com/drive/folders/1f5PcdEMynTs3O8RmMTPTNJzJ48zM4V6A" target="_blank" rel="noopener">
+          <span class="tag green">Drive</span>
+          <h3>Gate 2025 Folder</h3>
+          <p>GATE 2025 paper and related files.</p>
         </a>
-        <a class="card link-card" href="https://drive.google.com/drive/folders/1ZwWri4hBG4nQBhWbSN_Q1V9XPCg-zbFN" target="_blank" rel="noopener">
-          <span class="badge green">Drive</span>
-          <strong>Solved Question Paper</strong>
-          <span>Previous year solved papers and answer material.</span>
+        <a class="card" href="https://drive.google.com/drive/folders/1ZwWri4hBG4nQBhWbSN_Q1V9XPCg-zbFN" target="_blank" rel="noopener">
+          <span class="tag green">Drive</span>
+          <h3>Solved Question Paper</h3>
+          <p>Previous year papers and solved question resources.</p>
         </a>
-        <a class="card link-card" href="https://drive.google.com/drive/folders/1YP4lqfiuXE-6ybgI-3NfNFkcfXsG9ESy" target="_blank" rel="noopener">
-          <span class="badge green">Drive</span>
-          <strong>Handbook and Formula Book</strong>
-          <span>Formula sheets and revision references.</span>
+        <a class="card" href="https://drive.google.com/drive/folders/1YP4lqfiuXE-6ybgI-3NfNFkcfXsG9ESy" target="_blank" rel="noopener">
+          <span class="tag green">Drive</span>
+          <h3>Handbook and Formula Book</h3>
+          <p>Formula sheets and quick revision books.</p>
         </a>
-        <a class="card link-card" href="https://drive.google.com/drive/folders/16ZqSUCqnAhkvCC9akLadJmM1ciFzbDvi" target="_blank" rel="noopener">
-          <span class="badge green">Drive</span>
-          <strong>Notes</strong>
-          <span>Subject-wise EC notes and practice material.</span>
+        <a class="card" href="https://drive.google.com/drive/folders/16ZqSUCqnAhkvCC9akLadJmM1ciFzbDvi" target="_blank" rel="noopener">
+          <span class="tag green">Drive</span>
+          <h3>Notes</h3>
+          <p>Subject-wise GATE EC notes and practice material.</p>
+        </a>
+        <a class="card" href="https://docs.google.com/spreadsheets/d/1gaTieT4arZ0mUdVW6MJLN11V7LkMjGGsEkYHTUKEIfA/edit" target="_blank" rel="noopener">
+          <span class="tag">Sheet</span>
+          <h3>Rishi Gate Complete One Book</h3>
+          <p>Question bank, sources, answer key, analysis, and teaching plan.</p>
+        </a>
+        <a class="card" href="RISHI_GATE_EC_RESOURCES.md">
+          <span class="tag">GitHub</span>
+          <h3>Detailed Resource Guide</h3>
+          <p>Plain text guide with links, scoring rule, and teaching workflow.</p>
         </a>
       </div>
     </section>
 
     <section>
-      <h2>Daily Test Format</h2>
+      <h2>Daily Question Paper Structure</h2>
       <table>
         <thead>
           <tr>
-            <th>Part</th>
+            <th>Section</th>
             <th>Questions</th>
-            <th>Format</th>
+            <th>Rule</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>General Aptitude</td>
             <td>5</td>
-            <td>MCQ main format</td>
+            <td>GATE style verbal, reasoning, and quantitative aptitude.</td>
           </tr>
           <tr>
             <td>Engineering Mathematics</td>
             <td>4</td>
-            <td>MCQ main format</td>
+            <td>Formula-based and calculation-based questions.</td>
           </tr>
           <tr>
             <td>EC Technical</td>
             <td>24</td>
-            <td>MCQ main format</td>
+            <td>Chapter-wise EC mix from networks, signals, control, analog, digital, devices, EMFT, and communication.</td>
           </tr>
           <tr>
             <td><strong>Total</strong></td>
             <td><strong>33</strong></td>
-            <td><strong>GATE EC level or slightly above</strong></td>
+            <td><strong>MCQ main format, GATE EC level or slightly above.</strong></td>
           </tr>
         </tbody>
       </table>
     </section>
 
-    <section class="card note">
-      <h2>Student Option</h2>
-      <p>Every question must include: <strong>Question is wrong/incomplete</strong>.</p>
-      <p>If confirmed wrong or incomplete, that question is removed from valid scoring.</p>
+    <section class="card band">
+      <h2>Question Paper Checklist</h2>
+      <ul class="list">
+        <li>Use clear MCQ options: A, B, C, D.</li>
+        <li>Use original diagram/screenshot source when required.</li>
+        <li>Add one extra option for every question: <code>Question is wrong/incomplete</code>.</li>
+        <li>Do not include personal documents or private student files.</li>
+        <li>Keep the paper compact enough for daily practice.</li>
+      </ul>
+    </section>
+
+    <section class="card band green">
+      <h2>Submission And Checking</h2>
+      <ul class="list">
+        <li>Student submits answers through Google Form or answer sheet.</li>
+        <li>Every question is checked: attempted, not attempted, correct, wrong, or wrong/incomplete.</li>
+        <li>Confirmed wrong/incomplete questions are removed from valid scoring.</li>
+        <li>Analysis must explain the correct method and calculation steps.</li>
+      </ul>
     </section>
 
     <section>
-      <h2>Scoring And Analysis</h2>
+      <h2>Scoring</h2>
       <div class="grid">
         <div class="card">
-          <span class="badge">Score</span>
+          <span class="tag">Formula</span>
           <h3>Percentage</h3>
-          <p>Correct Attempted x 100 / Valid Questions</p>
+          <p><code>Correct Attempted x 100 / Valid Questions</code></p>
         </div>
         <div class="card">
-          <span class="badge">Pass</span>
+          <span class="tag green">Pass Mark</span>
           <h3>60%</h3>
-          <p>60% or above is pass. Below 60% is Need Improvement.</p>
+          <p>60% or above is Pass.</p>
         </div>
         <div class="card">
-          <span class="badge amber">Review</span>
-          <h3>After Submission</h3>
-          <p>Check every question: attempted, not attempted, correct, wrong, topic, mistake, and solution method.</p>
+          <span class="tag orange">Improvement</span>
+          <h3>Below 60%</h3>
+          <p>Below 60% means Need Improvement with topic-wise practice.</p>
         </div>
       </div>
     </section>
+
+    <section class="card band orange">
+      <h2>Important</h2>
+      <p>Large PDFs should stay in Google Drive. GitHub should keep clean links and the index page only, so PDF preview errors do not come back.</p>
+    </section>
   </main>
+
+  <footer>
+    <div class="wrap">Updated for daily GATE EC MCQ practice: 33 questions, 5 Aptitude, 4 Maths, 24 EC Technical.</div>
+  </footer>
 </body>
 </html>
