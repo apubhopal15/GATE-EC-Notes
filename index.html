@@ -1,335 +1,1805 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Rishi GATE EC Practice Hub</title>
-  <style>
-    :root {
-      --bg: #f5f7fb;
-      --panel: #ffffff;
-      --ink: #172033;
-      --muted: #5f6b7c;
-      --line: #d9e1ec;
-      --blue: #1457d9;
-      --blue-dark: #0b3f9c;
-      --green: #087443;
-      --orange: #b54708;
-      --red: #b42318;
-      --soft-blue: #eaf1ff;
-      --soft-green: #ecfdf3;
-      --soft-orange: #fff7ed;
-    }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rishi GATE EC Practice Resources</title>
+<style>
+    :root { color-scheme: light; --line:#d7dee8; --ink:#17202a; --muted:#5d6878; --blue:#0969da; --bg:#f6f8fa; --chip:#eef4ff; }
     * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      color: var(--ink);
-      background: var(--bg);
-      line-height: 1.48;
+    body { margin: 0; font-family: Arial, Helvetica, sans-serif; background: #fff; color: var(--ink); }
+    header { position: sticky; top: 0; z-index: 3; background: rgba(255,255,255,.96); border-bottom: 1px solid var(--line); padding: 18px 26px; }
+    h1 { margin: 0 0 8px; font-size: 24px; letter-spacing: 0; }
+    .meta { color: var(--muted); font-size: 14px; display:flex; gap:16px; flex-wrap:wrap; }
+    .toolbar { margin-top: 14px; display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+    input, select { border:1px solid var(--line); border-radius:6px; padding:10px 12px; font-size:14px; min-height:40px; background:white; }
+    input { min-width: min(460px, 100%); flex: 1; }
+    main { max-width: 1180px; margin: 0 auto; padding: 18px 18px 46px; }
+    .notice { border: 1px solid #f0d289; background:#fff8db; padding:12px 14px; border-radius:6px; color:#5f4700; margin-bottom:14px; line-height:1.45; }
+    details { border:1px solid var(--line); border-radius:6px; margin: 12px 0; background: #fff; overflow:hidden; }
+    summary { cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:14px; padding:14px 16px; background:var(--bg); font-weight:700; }
+    summary span { color:var(--muted); font-weight:400; }
+    .row { display:grid; grid-template-columns: 72px minmax(190px, 1fr) 130px; gap:14px; align-items:center; padding:12px 16px; border-top:1px solid var(--line); }
+    .badge { width:52px; text-align:center; font-weight:700; font-size:12px; border:1px solid #b6c6dc; background:var(--chip); color:#174ea6; border-radius:4px; padding:5px 0; }
+    .file-name { font-size:15px; line-height:1.35; overflow-wrap:anywhere; }
+    .path { margin-top:4px; color:var(--muted); font-size:13px; overflow-wrap:anywhere; }
+    a.open { color:var(--blue); text-decoration:none; font-weight:700; font-size:14px; text-align:right; }
+    a.open:hover { text-decoration:underline; }
+    .empty { padding:14px 16px; color:var(--muted); border-top:1px solid var(--line); }
+    footer { color:var(--muted); font-size:13px; margin-top:18px; line-height:1.5; }
+    @media (max-width: 720px) {
+      header { padding: 14px; }
+      main { padding: 12px; }
+      .row { grid-template-columns: 58px 1fr; }
+      a.open { grid-column: 2; text-align:left; }
+      summary { align-items:flex-start; flex-direction:column; }
     }
-    header {
-      background: #101828;
-      color: #ffffff;
-      border-bottom: 4px solid var(--blue);
-    }
-    .wrap {
-      width: min(1120px, calc(100% - 32px));
-      margin: 0 auto;
-    }
-    .hero {
-      padding: 30px 0 24px;
-      display: grid;
-      grid-template-columns: 1.6fr 1fr;
-      gap: 22px;
-      align-items: end;
-    }
-    h1, h2, h3 { margin: 0; }
-    h1 {
-      font-size: clamp(28px, 4vw, 44px);
-      line-height: 1.1;
-      letter-spacing: 0;
-    }
-    h2 {
-      font-size: 22px;
-      margin-bottom: 12px;
-    }
-    h3 {
-      font-size: 17px;
-      margin-bottom: 6px;
-    }
-    p { margin: 7px 0 0; color: var(--muted); }
-    header p { color: #cfd7e6; }
-    main { padding: 22px 0 46px; }
-    section { margin-top: 22px; }
-    .hero-box {
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 8px;
-      padding: 16px;
-      background: rgba(255,255,255,0.06);
-    }
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 16px;
-    }
-    a.button {
-      min-height: 42px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 10px 14px;
-      border-radius: 8px;
-      background: var(--blue);
-      color: #ffffff;
-      text-decoration: none;
-      font-weight: 700;
-    }
-    a.button:hover { background: var(--blue-dark); }
-    a.button.light {
-      background: #ffffff;
-      color: var(--blue);
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 14px;
-    }
-    .card {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 16px;
-    }
-    a.card {
-      display: block;
-      min-height: 128px;
-      color: inherit;
-      text-decoration: none;
-    }
-    a.card:hover {
-      border-color: var(--blue);
-      box-shadow: 0 8px 22px rgba(20, 87, 217, 0.12);
-    }
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      min-height: 24px;
-      padding: 3px 9px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 700;
-      color: #ffffff;
-      background: var(--blue);
-      margin-bottom: 10px;
-    }
-    .tag.green { background: var(--green); }
-    .tag.orange { background: var(--orange); }
-    .tag.red { background: var(--red); }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      overflow: hidden;
-    }
-    th, td {
-      text-align: left;
-      vertical-align: top;
-      padding: 12px;
-      border-bottom: 1px solid var(--line);
-    }
-    th { background: #edf3fb; }
-    tr:last-child td { border-bottom: 0; }
-    .band {
-      border-left: 4px solid var(--blue);
-      background: var(--soft-blue);
-    }
-    .band.green {
-      border-left-color: var(--green);
-      background: var(--soft-green);
-    }
-    .band.orange {
-      border-left-color: var(--orange);
-      background: var(--soft-orange);
-    }
-    .list {
-      margin: 8px 0 0;
-      padding-left: 18px;
-      color: var(--muted);
-    }
-    .list li { margin-top: 4px; }
-    code {
-      background: #eef2f7;
-      padding: 2px 5px;
-      border-radius: 5px;
-      color: #111827;
-    }
-    footer {
-      color: var(--muted);
-      padding: 18px 0 28px;
-      border-top: 1px solid var(--line);
-    }
-    @media (max-width: 760px) {
-      .hero { grid-template-columns: 1fr; }
-      .wrap { width: min(100% - 24px, 1120px); }
-      th, td { padding: 10px; }
-    }
-  </style>
+    </style>
 </head>
 <body>
-  <header>
-    <div class="wrap hero">
-      <div>
-        <h1>Rishi GATE EC Practice Hub</h1>
-        <p>Daily GATE EC style MCQ practice, source folders, one-book tracking, and answer analysis in one place.</p>
-        <div class="actions">
-          <a class="button" href="https://docs.google.com/spreadsheets/d/1gaTieT4arZ0mUdVW6MJLN11V7LkMjGGsEkYHTUKEIfA/edit" target="_blank" rel="noopener">Open One Book</a>
-          <a class="button light" href="https://drive.google.com/drive/folders/18Bcx13cVUBgZFMoiPenZg6zMsZXfKcHS" target="_blank" rel="noopener">Open Master Drive</a>
-        </div>
-      </div>
-      <div class="hero-box">
-        <span class="tag green">Daily Rule</span>
-        <h2>33 Questions</h2>
-        <p>5 Aptitude + 4 Engineering Mathematics + 24 EC Technical. Main format: MCQ. Level: GATE EC or slightly above.</p>
-      </div>
-    </div>
-  </header>
-
-  <main class="wrap">
-    <section>
-      <h2>Open Direct Resources</h2>
-      <div class="grid">
-        <a class="card" href="https://drive.google.com/drive/folders/18Bcx13cVUBgZFMoiPenZg6zMsZXfKcHS" target="_blank" rel="noopener">
-          <span class="tag green">Drive</span>
-          <h3>Master Drive Folder</h3>
-          <p>Main uploaded folder for EC resources. Use study material only for students.</p>
-        </a>
-        <a class="card" href="https://drive.google.com/drive/folders/1YPQ1Skysc9HHhj5ITNHiJ-mhhkPNQiQn" target="_blank" rel="noopener">
-          <span class="tag green">Drive</span>
-          <h3>GATE 2025 Study Resources</h3>
-          <p>Latest GATE 2025 resource folder.</p>
-        </a>
-        <a class="card" href="https://drive.google.com/drive/folders/1f5PcdEMynTs3O8RmMTPTNJzJ48zM4V6A" target="_blank" rel="noopener">
-          <span class="tag green">Drive</span>
-          <h3>Gate 2025 Folder</h3>
-          <p>GATE 2025 paper and related files.</p>
-        </a>
-        <a class="card" href="https://drive.google.com/drive/folders/1ZwWri4hBG4nQBhWbSN_Q1V9XPCg-zbFN" target="_blank" rel="noopener">
-          <span class="tag green">Drive</span>
-          <h3>Solved Question Paper</h3>
-          <p>Previous year papers and solved question resources.</p>
-        </a>
-        <a class="card" href="https://drive.google.com/drive/folders/1YP4lqfiuXE-6ybgI-3NfNFkcfXsG9ESy" target="_blank" rel="noopener">
-          <span class="tag green">Drive</span>
-          <h3>Handbook and Formula Book</h3>
-          <p>Formula sheets and quick revision books.</p>
-        </a>
-        <a class="card" href="https://drive.google.com/drive/folders/16ZqSUCqnAhkvCC9akLadJmM1ciFzbDvi" target="_blank" rel="noopener">
-          <span class="tag green">Drive</span>
-          <h3>Notes</h3>
-          <p>Subject-wise GATE EC notes and practice material.</p>
-        </a>
-        <a class="card" href="https://docs.google.com/spreadsheets/d/1gaTieT4arZ0mUdVW6MJLN11V7LkMjGGsEkYHTUKEIfA/edit" target="_blank" rel="noopener">
-          <span class="tag">Sheet</span>
-          <h3>Rishi Gate Complete One Book</h3>
-          <p>Question bank, sources, answer key, analysis, and teaching plan.</p>
-        </a>
-        <a class="card" href="RISHI_GATE_EC_RESOURCES.md">
-          <span class="tag">GitHub</span>
-          <h3>Detailed Resource Guide</h3>
-          <p>Plain text guide with links, scoring rule, and teaching workflow.</p>
-        </a>
-      </div>
-    </section>
-
-    <section>
-      <h2>Daily Question Paper Structure</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Section</th>
-            <th>Questions</th>
-            <th>Rule</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>General Aptitude</td>
-            <td>5</td>
-            <td>GATE style verbal, reasoning, and quantitative aptitude.</td>
-          </tr>
-          <tr>
-            <td>Engineering Mathematics</td>
-            <td>4</td>
-            <td>Formula-based and calculation-based questions.</td>
-          </tr>
-          <tr>
-            <td>EC Technical</td>
-            <td>24</td>
-            <td>Chapter-wise EC mix from networks, signals, control, analog, digital, devices, EMFT, and communication.</td>
-          </tr>
-          <tr>
-            <td><strong>Total</strong></td>
-            <td><strong>33</strong></td>
-            <td><strong>MCQ main format, GATE EC level or slightly above.</strong></td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <section class="card band">
-      <h2>Question Paper Checklist</h2>
-      <ul class="list">
-        <li>Use clear MCQ options: A, B, C, D.</li>
-        <li>Use original diagram/screenshot source when required.</li>
-        <li>Add one extra option for every question: <code>Question is wrong/incomplete</code>.</li>
-        <li>Do not include personal documents or private student files.</li>
-        <li>Keep the paper compact enough for daily practice.</li>
-      </ul>
-    </section>
-
-    <section class="card band green">
-      <h2>Submission And Checking</h2>
-      <ul class="list">
-        <li>Student submits answers through Google Form or answer sheet.</li>
-        <li>Every question is checked: attempted, not attempted, correct, wrong, or wrong/incomplete.</li>
-        <li>Confirmed wrong/incomplete questions are removed from valid scoring.</li>
-        <li>Analysis must explain the correct method and calculation steps.</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>Scoring</h2>
-      <div class="grid">
-        <div class="card">
-          <span class="tag">Formula</span>
-          <h3>Percentage</h3>
-          <p><code>Correct Attempted x 100 / Valid Questions</code></p>
-        </div>
-        <div class="card">
-          <span class="tag green">Pass Mark</span>
-          <h3>60%</h3>
-          <p>60% or above is Pass.</p>
-        </div>
-        <div class="card">
-          <span class="tag orange">Improvement</span>
-          <h3>Below 60%</h3>
-          <p>Below 60% means Need Improvement with topic-wise practice.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="card band orange">
-      <h2>Important</h2>
-      <p>Large PDFs should stay in Google Drive. GitHub should keep clean links and the index page only, so PDF preview errors do not come back.</p>
-    </section>
-  </main>
-
-  <footer>
-    <div class="wrap">Updated for daily GATE EC MCQ practice: 33 questions, 5 Aptitude, 4 Maths, 24 EC Technical.</div>
-  </footer>
+<header>
+  <h1>Rishi GATE EC Practice Resources</h1>
+  <div class="meta"><strong>210 files</strong><span>Updated 20/7/2026, 12:23:22 am</span><span>Daily test: 5 Aptitude + 4 Maths + 24 EC MCQ</span><span>Pass mark: 60%</span></div>
+  <div class="toolbar">
+    <input id="q" type="search" placeholder="Search file, subject, year, or topic">
+    <select id="category">
+      <option value="">All sections</option>
+      <option value="General Aptitude">General Aptitude (2)</option>
+<option value="Engineering Mathematics">Engineering Mathematics (14)</option>
+<option value="Networks">Networks (13)</option>
+<option value="Signals and Systems">Signals and Systems (40)</option>
+<option value="Electronic Devices">Electronic Devices (3)</option>
+<option value="Analog Circuits">Analog Circuits (16)</option>
+<option value="Digital Circuits">Digital Circuits (12)</option>
+<option value="Control Systems">Control Systems (4)</option>
+<option value="Communications">Communications (7)</option>
+<option value="Electromagnetics">Electromagnetics (8)</option>
+<option value="Previous Year / Solved Papers">Previous Year / Solved Papers (57)</option>
+<option value="Formula Book / Handbook">Formula Book / Handbook (6)</option>
+<option value="Reference Books">Reference Books (7)</option>
+<option value="Image References">Image References (11)</option>
+<option value="Other EC Resources">Other EC Resources (10)</option>
+    </select>
+  </div>
+</header>
+<main>
+  <div class="notice">Use this as the one-page index for Rishi. Question papers should be made from these resources without changing original questions or diagrams. If a question is incomplete, the student must tick "Question is wrong/incomplete"; that item is removed from scoring and a corrected sheet is sent.</div>
+  <details open data-section="General Aptitude">
+  <summary>General Aptitude <span>2 files</span></summary>
+  <div class="row" data-name="reasoning and aptitude made easy handwritten notes for gate.pdf notes 📚/gate ece notes/10.general aptitude/reasoning and aptitude made easy handwritten notes for gate.pdf general aptitude" data-category="General Aptitude">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">Reasoning and Aptitude Made Easy Handwritten Notes for GATE.pdf</div>
+    <div class="path">Notes 📚/GATE ECE Notes/10.General Aptitude/Reasoning and Aptitude Made Easy Handwritten Notes for GATE.pdf &middot; Study Notes &middot; 21.67 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/GATE%20ECE%20Notes/10.General%20Aptitude/Reasoning%20and%20Aptitude%20Made%20Easy%20Handwritten%20Notes%20for%20GATE.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="10.-general-aptitude_final-ece.pdf notes 📚/gate wallah__pw/10.-general-aptitude_final-ece.pdf general aptitude" data-category="General Aptitude">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">10.-General-Aptitude_FINAL-ECE.pdf</div>
+    <div class="path">Notes 📚/GATE Wallah__PW/10.-General-Aptitude_FINAL-ECE.pdf &middot; Study Notes &middot; 0.69 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/GATE%20Wallah__PW/10.-General-Aptitude_FINAL-ECE.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+</details><details open data-section="Engineering Mathematics">
+  <summary>Engineering Mathematics <span>14 files</span></summary>
+  <div class="row" data-name="3.engineering-mathematics-gate-notes-free3.pdf.pdf adhil/gate material [github]/gate-prep-resources/mathematics/3.engineering-mathematics-gate-notes-free3.pdf.pdf engineering mathematics" data-category="Engineering Mathematics">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">3.Engineering-Mathematics-Gate-Notes-Free3.pdf.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Mathematics/3.Engineering-Mathematics-Gate-Notes-Free3.pdf.pdf &middot; Study Notes &middot; 44.52 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Mathematics/3.Engineering-Mathematics-Gate-Notes-Free3.pdf.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="4.engineering-mathematics-gate-notes-free4.pdf.pdf adhil/gate material [github]/gate-prep-resources/mathematics/4.engineering-mathematics-gate-notes-free4.pdf.pdf engineering mathematics" data-category="Engineering Mathematics">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">4.Engineering-Mathematics-Gate-Notes-Free4.pdf.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Mathematics/4.Engineering-Mathematics-Gate-Notes-Free4.pdf.pdf &middot; Study Notes &middot; 20.89 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Mathematics/4.Engineering-Mathematics-Gate-Notes-Free4.pdf.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="_math_resources_trigonometric_formulas.pdf adhil/gate material [github]/gate-prep-resources/mathematics/_math_resources_trigonometric_formulas.pdf engineering mathematics" data-category="Engineering Mathematics">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">_Math_Resources_Trigonometric_Formulas.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Mathematics/_Math_Resources_Trigonometric_Formulas.pdf &middot; Study Notes &middot; 0.2 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Mathematics/_Math_Resources_Trigonometric_Formulas.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="calculus_cheat_sheet_all.pdf adhil/gate material [github]/gate-prep-resources/mathematics/calculus_cheat_sheet_all.pdf engineering mathematics" data-category="Engineering Mathematics">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">Calculus_Cheat_Sheet_All.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Mathematics/Calculus_Cheat_Sheet_All.pdf &middot; Study Notes &middot; 0.24 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Mathematics/Calculus_Cheat_Sheet_All.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="engineeringmathematics formula.pdf handbook &amp; formula book/engineeringmathematics formula.pdf engineering mathematics" data-category="Engineering Mathematics">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">engineeringmathematics formula.pdf</div>
+    <div class="path">Handbook &amp; Formula book/engineeringmathematics formula.pdf &middot; Study Notes &middot; 1.69 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Handbook%20%26%20Formula%20book/engineeringmathematics%20formula.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="basic-engg-mathematics.pdf notes 📚/ace materials, formulas__wordpress/basic-engg-mathematics.pdf engineering mathematics" data-category="Engineering Mathematics">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">basic-engg-mathematics.pdf</div>
+    <div class="path">Notes 📚/ACE MATERIALS, FORMULAS__WordPress/basic-engg-mathematics.pdf &middot; Study Notes &middot; 1.96 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/ACE%20MATERIALS%2C%20FORMULAS__WordPress/basic-engg-mathematics.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="engineeringmathematics.pdf notes 📚/ace materials, formulas__wordpress/engineeringmathematics.pdf engineering mathematics" data-category="Engineering Mathematics">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">engineeringmathematics.pdf</div>
+    <div class="path">Notes 📚/ACE MATERIALS, FORMULAS__WordPress/engineeringmathematics.pdf &middot; Study Notes &middot; 1.69 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/ACE%20MATERIALS%2C%20FORMULAS__WordPress/engineeringmathematics.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="1.engineering-mathematics-gate-notes-free1.pdf notes 📚/gate ece notes/9.engineering mathematics/1.engineering-mathematics-gate-notes-free1.pdf engineering mathematics" data-category="Engineering Mathematics">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">1.Engineering-Mathematics-Gate-Notes-Free1.pdf</div>
+    <div class="path">Notes 📚/GATE ECE Notes/9.Engineering Mathematics/1.Engineering-Mathematics-Gate-Notes-Free1.pdf &middot; Study Notes &middot; 1.23 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/GATE%20ECE%20Notes/9.Engineering%20Mathematics/1.Engineering-Mathematics-Gate-Notes-Free1.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="3.engineering-mathematics-gate-notes-free3.pdf notes 📚/gate ece notes/9.engineering mathematics/3.engineering-mathematics-gate-notes-free3.pdf engineering mathematics" data-category="Engineering Mathematics">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">3.Engineering-Mathematics-Gate-Notes-Free3.pdf</div>
+    <div class="path">Notes 📚/GATE ECE Notes/9.Engineering Mathematics/3.Engineering-Mathematics-Gate-Notes-Free3.pdf &middot; Study Notes &middot; 44.57 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/GATE%20ECE%20Notes/9.Engineering%20Mathematics/3.Engineering-Mathematics-Gate-Notes-Free3.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="4.engineering-mathematics-gate-notes-free4.pdf notes 📚/gate ece notes/9.engineering mathematics/4.engineering-mathematics-gate-notes-free4.pdf engineering mathematics" data-category="Engineering Mathematics">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">4.Engineering-Mathematics-Gate-Notes-Free4.pdf</div>
+    <div class="path">Notes 📚/GATE ECE Notes/9.Engineering Mathematics/4.Engineering-Mathematics-Gate-Notes-Free4.pdf &middot; Study Notes &middot; 17.48 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/GATE%20ECE%20Notes/9.Engineering%20Mathematics/4.Engineering-Mathematics-Gate-Notes-Free4.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="5.engineering-mathematics-gate-notes-free5.pdf notes 📚/gate ece notes/9.engineering mathematics/5.engineering-mathematics-gate-notes-free5.pdf engineering mathematics" data-category="Engineering Mathematics">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">5.Engineering-Mathematics-Gate-Notes-Free5.pdf</div>
+    <div class="path">Notes 📚/GATE ECE Notes/9.Engineering Mathematics/5.Engineering-Mathematics-Gate-Notes-Free5.pdf &middot; Study Notes &middot; 8.94 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/GATE%20ECE%20Notes/9.Engineering%20Mathematics/5.Engineering-Mathematics-Gate-Notes-Free5.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="1.-engineering-mathematics_with-link_ec.pdf notes 📚/gate wallah__pw/1.-engineering-mathematics_with-link_ec.pdf engineering mathematics" data-category="Engineering Mathematics">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">1.-Engineering-Mathematics_with-LINK_EC.pdf</div>
+    <div class="path">Notes 📚/GATE Wallah__PW/1.-Engineering-Mathematics_with-LINK_EC.pdf &middot; Study Notes &middot; 2.42 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/GATE%20Wallah__PW/1.-Engineering-Mathematics_with-LINK_EC.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ec_engineering-mathematics gate previous questions with answers.pdf solved question paper/gate  ec chaptertopic-wise previous year solved questions (2010-2018)/ec_engineering-mathematics gate previous questions with answers.pdf engineering mathematics" data-category="Engineering Mathematics">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">EC_Engineering-Mathematics GATE Previous Questions with Answers.pdf</div>
+    <div class="path">Solved Question Paper/GATE  EC ChapterTopic-wise Previous Year Solved Questions (2010-2018)/EC_Engineering-Mathematics GATE Previous Questions with Answers.pdf &middot; Study Notes &middot; 2.74 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/GATE%20%20EC%20ChapterTopic-wise%20Previous%20Year%20Solved%20Questions%20%282010-2018%29/EC_Engineering-Mathematics%20GATE%20Previous%20Questions%20with%20Answers.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ec_engineering-mathematics.pdf solved question paper/solved papers/ec_engineering-mathematics.pdf engineering mathematics" data-category="Engineering Mathematics">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">EC_Engineering-Mathematics.pdf</div>
+    <div class="path">Solved Question Paper/Solved Papers/EC_Engineering-Mathematics.pdf &middot; Study Notes &middot; 0.22 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/Solved%20Papers/EC_Engineering-Mathematics.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+</details><details open data-section="Networks">
+  <summary>Networks <span>13 files</span></summary>
+  <div class="row" data-name="1.network-theory_gate.pdf adhil/gate material [github]/gate-prep-resources/network theory/1.network-theory_gate.pdf networks" data-category="Networks">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">1.Network-Theory_Gate.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Network theory/1.Network-Theory_Gate.pdf &middot; Study Notes &middot; 14.67 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Network%20theory/1.Network-Theory_Gate.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="5.network-theory_gate-ece-notes-free5.pdf adhil/gate material [github]/gate-prep-resources/network theory/5.network-theory_gate-ece-notes-free5.pdf networks" data-category="Networks">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">5.Network-Theory_Gate-ece-Notes-free5.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Network theory/5.Network-Theory_Gate-ece-Notes-free5.pdf &middot; Study Notes &middot; 2.11 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Network%20theory/5.Network-Theory_Gate-ece-Notes-free5.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ec_network-analysis.pdf adhil/gate material [github]/gate-prep-resources/network theory/ec_network-analysis.pdf networks" data-category="Networks">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">EC_Network-Analysis.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Network theory/EC_Network-Analysis.pdf &middot; Study Notes &middot; 3.19 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Network%20theory/EC_Network-Analysis.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="network-theory-study-material.pdf notes 📚/ace materials, formulas__wordpress/network-theory-study-material.pdf networks" data-category="Networks">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">network-theory-study-material.pdf</div>
+    <div class="path">Notes 📚/ACE MATERIALS, FORMULAS__WordPress/network-theory-study-material.pdf &middot; Study Notes &middot; 1.51 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/ACE%20MATERIALS%2C%20FORMULAS__WordPress/network-theory-study-material.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="1.network-theory_gate-ece-notes-free1-copy.pdf notes 📚/gate ece notes/1.network theory/1.network-theory_gate-ece-notes-free1-copy.pdf networks" data-category="Networks">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">1.Network-Theory_Gate-ece-Notes-free1-Copy.pdf</div>
+    <div class="path">Notes 📚/GATE ECE Notes/1.Network Theory/1.Network-Theory_Gate-ece-Notes-free1-Copy.pdf &middot; Study Notes &middot; 14.67 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/GATE%20ECE%20Notes/1.Network%20Theory/1.Network-Theory_Gate-ece-Notes-free1-Copy.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="3.network-theory_gate-ece-notes-free3-copy.pdf notes 📚/gate ece notes/1.network theory/3.network-theory_gate-ece-notes-free3-copy.pdf networks" data-category="Networks">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">3.Network-Theory_Gate-ece-Notes-free3-Copy.pdf</div>
+    <div class="path">Notes 📚/GATE ECE Notes/1.Network Theory/3.Network-Theory_Gate-ece-Notes-free3-Copy.pdf &middot; Study Notes &middot; 12.71 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/GATE%20ECE%20Notes/1.Network%20Theory/3.Network-Theory_Gate-ece-Notes-free3-Copy.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="5.network-theory_gate-ece-notes-free5.pdf notes 📚/gate ece notes/1.network theory/5.network-theory_gate-ece-notes-free5.pdf networks" data-category="Networks">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">5.Network-Theory_Gate-ece-Notes-free5.pdf</div>
+    <div class="path">Notes 📚/GATE ECE Notes/1.Network Theory/5.Network-Theory_Gate-ece-Notes-free5.pdf &middot; Study Notes &middot; 1.51 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/GATE%20ECE%20Notes/1.Network%20Theory/5.Network-Theory_Gate-ece-Notes-free5.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="6.network-theory_gate-ece-notes-free6-copy.pdf notes 📚/gate ece notes/1.network theory/6.network-theory_gate-ece-notes-free6-copy.pdf networks" data-category="Networks">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">6.Network-Theory_Gate-ece-Notes-free6-Copy.pdf</div>
+    <div class="path">Notes 📚/GATE ECE Notes/1.Network Theory/6.Network-Theory_Gate-ece-Notes-free6-Copy.pdf &middot; Study Notes &middot; 8.46 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/GATE%20ECE%20Notes/1.Network%20Theory/6.Network-Theory_Gate-ece-Notes-free6-Copy.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="2.-network-theory_updated_final_with-link.pdf notes 📚/gate wallah__pw/2.-network-theory_updated_final_with-link.pdf networks" data-category="Networks">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">2.-Network-Theory_Updated_FINAL_with-Link.pdf</div>
+    <div class="path">Notes 📚/GATE Wallah__PW/2.-Network-Theory_Updated_FINAL_with-Link.pdf &middot; Study Notes &middot; 4.59 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/GATE%20Wallah__PW/2.-Network-Theory_Updated_FINAL_with-Link.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="5-network_theory.pdf notes 📚/made easy notes all subjects__wordpress/5-network_theory.pdf networks" data-category="Networks">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">5-network_theory.pdf</div>
+    <div class="path">Notes 📚/MADE EASY NOTES ALL SUBJECTS__WordPress/5-network_theory.pdf &middot; Study Notes &middot; 15.4 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/MADE%20EASY%20NOTES%20ALL%20SUBJECTS__WordPress/5-network_theory.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="[made easy] network theory - electronics engineering gate handwritten notes pdf download.pdf notes 📚/made easy notes all subjects__wordpress/gate notes-2/[made easy] network theory - electronics engineering gate handwritten notes pdf download.pdf networks" data-category="Networks">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">[Made Easy] Network Theory - Electronics Engineering Gate Handwritten Notes PDF Download.pdf</div>
+    <div class="path">Notes 📚/MADE EASY NOTES ALL SUBJECTS__WordPress/GATE Notes-2/[Made Easy] Network Theory - Electronics Engineering Gate Handwritten Notes PDF Download.pdf &middot; Study Notes &middot; 14.58 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/MADE%20EASY%20NOTES%20ALL%20SUBJECTS__WordPress/GATE%20Notes-2/%5BMade%20Easy%5D%20Network%20Theory%20-%20Electronics%20Engineering%20Gate%20Handwritten%20Notes%20PDF%20Download.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ec_network-analysis gate previous questions with answers.pdf solved question paper/gate  ec chaptertopic-wise previous year solved questions (2010-2018)/ec_network-analysis gate previous questions with answers.pdf networks" data-category="Networks">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">EC_Network-Analysis GATE Previous Questions with Answers.pdf</div>
+    <div class="path">Solved Question Paper/GATE  EC ChapterTopic-wise Previous Year Solved Questions (2010-2018)/EC_Network-Analysis GATE Previous Questions with Answers.pdf &middot; Study Notes &middot; 5.4 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/GATE%20%20EC%20ChapterTopic-wise%20Previous%20Year%20Solved%20Questions%20%282010-2018%29/EC_Network-Analysis%20GATE%20Previous%20Questions%20with%20Answers.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ec_network-analysis.pdf solved question paper/solved papers/ec_network-analysis.pdf networks" data-category="Networks">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">EC_Network-Analysis.pdf</div>
+    <div class="path">Solved Question Paper/Solved Papers/EC_Network-Analysis.pdf &middot; Study Notes &middot; 1.79 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/Solved%20Papers/EC_Network-Analysis.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+</details><details open data-section="Signals and Systems">
+  <summary>Signals and Systems <span>40 files</span></summary>
+  <div class="row" data-name="1.communication-systems_gate-ece-notes-free1.pdf adhil/gate material [github]/gate-prep-resources/communication systems/1.communication-systems_gate-ece-notes-free1.pdf signals and systems" data-category="Signals and Systems">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">1.Communication-Systems_Gate-ece-Notes-free1.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Communication Systems/1.Communication-Systems_Gate-ece-Notes-free1.pdf &middot; Study Notes &middot; 19.04 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Communication%20Systems/1.Communication-Systems_Gate-ece-Notes-free1.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="2.communication-systems_gate-ece-notes-free2.pdf adhil/gate material [github]/gate-prep-resources/communication systems/2.communication-systems_gate-ece-notes-free2.pdf signals and systems" data-category="Signals and Systems">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">2.Communication-Systems_Gate-ece-Notes-free2.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Communication Systems/2.Communication-Systems_Gate-ece-Notes-free2.pdf &middot; Study Notes &middot; 3.48 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Communication%20Systems/2.Communication-Systems_Gate-ece-Notes-free2.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="3.-communication-systems.pdf adhil/gate material [github]/gate-prep-resources/communication systems/3.-communication-systems.pdf signals and systems" data-category="Signals and Systems">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">3.-Communication-Systems.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Communication Systems/3.-Communication-Systems.pdf &middot; Study Notes &middot; 2.96 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Communication%20Systems/3.-Communication-Systems.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="detection and coding .pdf adhil/gate material [github]/gate-prep-resources/communication systems/detection and coding .pdf signals and systems" data-category="Signals and Systems">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">Detection and coding .pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Communication Systems/Detection and coding .pdf &middot; Study Notes &middot; 1.07 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Communication%20Systems/Detection%20and%20coding%20.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ec_communication-system.pdf adhil/gate material [github]/gate-prep-resources/communication systems/ec_communication-system.pdf signals and systems" data-category="Signals and Systems">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">EC_Communication-System.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Communication Systems/EC_Communication-System.pdf &middot; Study Notes &middot; 1.77 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Communication%20Systems/EC_Communication-System.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="2.control-systems_gate-ece-notes-free2.pdf adhil/gate material [github]/gate-prep-resources/control systems/2.control-systems_gate-ece-notes-free2.pdf signals and systems" data-category="Signals and Systems">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">2.Control-Systems_Gate-ece-Notes-free2.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Control systems/2.Control-Systems_Gate-ece-Notes-free2.pdf &middot; Study Notes &middot; 2.11 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Control%20systems/2.Control-Systems_Gate-ece-Notes-free2.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="control system.pdf adhil/gate material [github]/gate-prep-resources/control systems/control system.pdf signals and systems" data-category="Signals and Systems">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">Control System.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Control systems/Control System.pdf &middot; Study Notes &middot; 1.5 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Control%20systems/Control%20System.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="nyquist_plots.pdf adhil/gate material [github]/gate-prep-resources/control systems/nyquist_plots.pdf signals and systems" data-category="Signals and Systems">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">NYQUIST_PLOTS.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Control systems/NYQUIST_PLOTS.pdf &middot; Study Notes &middot; 2.12 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Control%20systems/NYQUIST_PLOTS.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="1.signal&amp;systems_gate-ece-notes-free1.pdf adhil/gate material [github]/gate-prep-resources/signals and system/1.signal&amp;systems_gate-ece-notes-free1.pdf signals and systems" data-category="Signals and Systems">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">1.Signal&amp;Systems_Gate-ece-Notes-free1.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Signals and system/1.Signal&amp;Systems_Gate-ece-Notes-free1.pdf &middot; Study Notes &middot; 12.3 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Signals%20and%20system/1.Signal%26Systems_Gate-ece-Notes-free1.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="10staylorpolyseries.pdf adhil/gate material [github]/gate-prep-resources/signals and system/10staylorpolyseries.pdf signals and systems" data-category="Signals and Systems">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">10sTaylorPolySeries.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Signals and system/10sTaylorPolySeries.pdf &middot; Study Notes &middot; 0.13 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Signals%20and%20system/10sTaylorPolySeries.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="2.signal&amp;systems_gate-ece-notes-free2.pdf.pdf adhil/gate material [github]/gate-prep-resources/signals and system/2.signal&amp;systems_gate-ece-notes-free2.pdf.pdf signals and systems" data-category="Signals and Systems">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">2.Signal&amp;Systems_Gate-ece-Notes-free2.pdf.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Signals and system/2.Signal&amp;Systems_Gate-ece-Notes-free2.pdf.pdf &middot; Study Notes &middot; 8.41 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Signals%20and%20system/2.Signal%26Systems_Gate-ece-Notes-free2.pdf.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="[solved] when two coupled coils of equal self-inductance are connecte.png adhil/gate material [github]/gate-prep-resources/signals and system/[solved] when two coupled coils of equal self-inductance are connecte.png signals and systems" data-category="Signals and Systems">
+  <div class="badge">PNG</div>
+  <div>
+    <div class="file-name">[Solved] When two coupled coils of equal self-inductance are connecte.png</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Signals and system/[Solved] When two coupled coils of equal self-inductance are connecte.png &middot; Study Notes &middot; 0.84 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Signals%20and%20system/%5BSolved%5D%20When%20two%20coupled%20coils%20of%20equal%20self-inductance%20are%20connecte.png" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="chapter_3_signals_and_systems_gate_previ.pdf adhil/gate material [github]/gate-prep-resources/signals and system/chapter_3_signals_and_systems_gate_previ.pdf signals and systems" data-category="Signals and Systems">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">CHAPTER_3_SIGNALS_and_SYSTEMS_GATE_Previ.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Signals and system/CHAPTER_3_SIGNALS_and_SYSTEMS_GATE_Previ.pdf &middot; Study Notes &middot; 2.38 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Signals%20and%20system/CHAPTER_3_SIGNALS_and_SYSTEMS_GATE_Previ.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="communication system.pdf adhil/gate material [github]/gate-prep-resources/signals and system/communication system.pdf signals and systems" data-category="Signals and Systems">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">Communication System.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Signals and system/Communication System.pdf &middot; Study Notes &middot; 0.69 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Signals%20and%20system/Communication%20System.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="fourier.pdf adhil/gate material [github]/gate-prep-resources/signals and system/fourier.pdf signals and systems" data-category="Signals and Systems">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">fourier.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Signals and system/fourier.pdf &middot; Study Notes &middot; 0.1 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Signals%20and%20system/fourier.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="screenshot 2023-12-08 at 1.44.25γç»pm.png adhil/gate material [github]/gate-prep-resources/signals and system/screenshot 2023-12-08 at 1.44.25γç»pm.png signals and systems" data-category="Signals and Systems">
+  <div class="badge">PNG</div>
+  <div>
+    <div class="file-name">Screenshot 2023-12-08 at 1.44.25ΓÇ»PM.png</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Signals and system/Screenshot 2023-12-08 at 1.44.25ΓÇ»PM.png &middot; Study Notes &middot; 2.01 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Signals%20and%20system/Screenshot%202023-12-08%20at%201.44.25%CE%93%C3%87%C2%BBPM.png" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="scribd.vdownloaders.com_signals-amp-systems-workbook-pdf.pdf adhil/gate material [github]/gate-prep-resources/signals and system/scribd.vdownloaders.com_signals-amp-systems-workbook-pdf.pdf signals and systems" data-category="Signals and Systems">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">scribd.vdownloaders.com_signals-amp-systems-workbook-pdf.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Signals and system/scribd.vdownloaders.com_signals-amp-systems-workbook-pdf.pdf &middot; Study Notes &middot; 10.65 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Signals%20and%20system/scribd.vdownloaders.com_signals-amp-systems-workbook-pdf.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="signals-systems-5.pdf adhil/gate material [github]/gate-prep-resources/signals and system/signals-systems-5.pdf signals and systems" data-category="Signals and Systems">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">Signals-Systems-5.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Signals and system/Signals-Systems-5.pdf &middot; Study Notes &middot; 1.66 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Signals%20and%20system/Signals-Systems-5.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="communication-systems-study-material.pdf notes 📚/ace materials, formulas__wordpress/communication-systems-study-material.pdf signals and systems" data-category="Signals and Systems">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">communication-systems-study-material.pdf</div>
+    <div class="path">Notes 📚/ACE MATERIALS, FORMULAS__WordPress/communication-systems-study-material.pdf &middot; Study Notes &middot; 1.62 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/ACE%20MATERIALS%2C%20FORMULAS__WordPress/communication-systems-study-material.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="signals _ systems hand written notes pdf download_part_1.pdf notes 📚/ace materials, formulas__wordpress/gate notes-1/signals _ systems hand written notes pdf download_part_1.pdf signals and systems" data-category="Signals and Systems">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">Signals _ Systems Hand Written Notes PDF Download_PART_1.pdf</div>
+    <div class="path">Notes 📚/ACE MATERIALS, FORMULAS__WordPress/GATE Notes-1/Signals _ Systems Hand Written Notes PDF Download_PART_1.pdf &middot; Study Notes &middot; 6.42 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/ACE%20MATERIALS%2C%20FORMULAS__WordPress/GATE%20Notes-1/Signals%20_%20Systems%20Hand%20Written%20Notes%20PDF%20Download_PART_1.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="signals _ systems hand written notes pdf download_part_2.pdf notes 📚/ace materials, formulas__wordpress/gate notes-1/signals _ systems hand written notes pdf download_part_2.pdf signals and systems" data-category="Signals and Systems">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">Signals _ Systems Hand Written Notes PDF Download_PART_2.pdf</div>
+    <div class="path">Notes 📚/ACE MATERIALS, FORMULAS__WordPress/GATE Notes-1/Signals _ Systems Hand Written Notes PDF Download_PART_2.pdf &middot; Study Notes &middot; 5.46 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/ACE%20MATERIALS%2C%20FORMULAS__WordPress/GATE%20Notes-1/Signals%20_%20Systems%20Hand%20Written%20Notes%20PDF%20Download_PART_2.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="signalssystems-study-material.pdf notes 📚/ace materials, formulas__wordpress/signalssystems-study-material.pdf signals and systems" data-category="Signals and Systems">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">signalssystems-study-material.pdf</div>
+    <div class="path">Notes 📚/ACE MATERIALS, FORMULAS__WordPress/signalssystems-study-material.pdf &middot; Study Notes &middot; 1.28 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/ACE%20MATERIALS%2C%20FORMULAS__WordPress/signalssystems-study-material.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="1.control-systems_gate-ece-notes-free1.pdf notes 📚/gate ece notes/3.control systems/1.control-systems_gate-ece-notes-free1.pdf signals and systems" data-category="Signals and Systems">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">1.Control-Systems_Gate-ece-Notes-free1.pdf</div>
+    <div class="path">Notes 📚/GATE ECE Notes/3.Control Systems/1.Control-Systems_Gate-ece-Notes-free1.pdf &middot; Study Notes &middot; 13.63 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/GATE%20ECE%20Notes/3.Control%20Systems/1.Control-Systems_Gate-ece-Notes-free1.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="2.control-systems_gate-ece-notes-free2.pdf notes 📚/gate ece notes/3.control systems/2.control-systems_gate-ece-notes-free2.pdf signals and systems" data-category="Signals and Systems">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">2.Control-Systems_Gate-ece-Notes-free2.pdf</div>
+    <div class="path">Notes 📚/GATE ECE Notes/3.Control Systems/2.Control-Systems_Gate-ece-Notes-free2.pdf &middot; Study Notes &middot; 1.37 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/GATE%20ECE%20Notes/3.Control%20Systems/2.Control-Systems_Gate-ece-Notes-free2.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="3.control-systems_gate-ece-notes-free3.pdf notes 📚/gate ece notes/3.control systems/3.control-systems_gate-ece-notes-free3.pdf signals and systems" data-category="Signals and Systems">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">3.Control-Systems_Gate-ece-Notes-free3.pdf</div>
+    <div class="path">Notes 📚/GATE ECE Notes/3.Control Systems/3.Control-Systems_Gate-ece-Notes-free3.pdf &middot; Study Notes &middot; 0.79 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/GATE%20ECE%20Notes/3.Control%20Systems/3.Control-Systems_Gate-ece-Notes-free3.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="4.control-systems_gate-ece-notes-free4.pdf notes 📚/gate ece notes/3.control systems/4.control-systems_gate-ece-notes-free4.pdf signals and systems" data-category="Signals and Systems">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">4.Control-Systems_Gate-ece-Notes-free4.pdf</div>
+    <div class="path">Notes 📚/GATE ECE Notes/3.Control Systems/4.Control-Systems_Gate-ece-Notes-free4.pdf &middot; Study Notes &middot; 20.69 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/GATE%20ECE%20Notes/3.Control%20Systems/4.Control-Systems_Gate-ece-Notes-free4.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="1.signal&amp;systems_gate-ece-notes-free1.pdf notes 📚/gate ece notes/7.signals &amp; systems/1.signal&amp;systems_gate-ece-notes-free1.pdf signals and systems" data-category="Signals and Systems">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">1.Signal&amp;Systems_Gate-ece-Notes-free1.pdf</div>
+    <div class="path">Notes 📚/GATE ECE Notes/7.Signals &amp; Systems/1.Signal&amp;Systems_Gate-ece-Notes-free1.pdf &middot; Study Notes &middot; 12.3 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/GATE%20ECE%20Notes/7.Signals%20%26%20Systems/1.Signal%26Systems_Gate-ece-Notes-free1.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="2.signal&amp;systems_gate-ece-notes-free2.pdf notes 📚/gate ece notes/7.signals &amp; systems/2.signal&amp;systems_gate-ece-notes-free2.pdf signals and systems" data-category="Signals and Systems">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">2.Signal&amp;Systems_Gate-ece-Notes-free2.pdf</div>
+    <div class="path">Notes 📚/GATE ECE Notes/7.Signals &amp; Systems/2.Signal&amp;Systems_Gate-ece-Notes-free2.pdf &middot; Study Notes &middot; 1.3 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/GATE%20ECE%20Notes/7.Signals%20%26%20Systems/2.Signal%26Systems_Gate-ece-Notes-free2.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="signal classifications and properties.pdf notes 📚/gate ece notes/7.signals &amp; systems/signal classifications and properties.pdf signals and systems" data-category="Signals and Systems">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">Signal Classifications and Properties.pdf</div>
+    <div class="path">Notes 📚/GATE ECE Notes/7.Signals &amp; Systems/Signal Classifications and Properties.pdf &middot; Study Notes &middot; 0.19 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/GATE%20ECE%20Notes/7.Signals%20%26%20Systems/Signal%20Classifications%20and%20Properties.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="signal-&amp;-system-amh3cf-sample.pdf notes 📚/gate ece notes/7.signals &amp; systems/signal-&amp;-system-amh3cf-sample.pdf signals and systems" data-category="Signals and Systems">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">Signal-&amp;-System-aMh3CF-sample.pdf</div>
+    <div class="path">Notes 📚/GATE ECE Notes/7.Signals &amp; Systems/Signal-&amp;-System-aMh3CF-sample.pdf &middot; Study Notes &middot; 1.25 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/GATE%20ECE%20Notes/7.Signals%20%26%20Systems/Signal-%26-System-aMh3CF-sample.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="signals-systems_compressed.pdf notes 📚/gate ece notes/7.signals &amp; systems/signals-systems_compressed.pdf signals and systems" data-category="Signals and Systems">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">signals-systems_compressed.pdf</div>
+    <div class="path">Notes 📚/GATE ECE Notes/7.Signals &amp; Systems/signals-systems_compressed.pdf &middot; Study Notes &middot; 4.86 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/GATE%20ECE%20Notes/7.Signals%20%26%20Systems/signals-systems_compressed.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="1.communication-systems_gate-ece-notes-free1.pdf notes 📚/gate ece notes/8.communication systems/1.communication-systems_gate-ece-notes-free1.pdf signals and systems" data-category="Signals and Systems">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">1.Communication-Systems_Gate-ece-Notes-free1.pdf</div>
+    <div class="path">Notes 📚/GATE ECE Notes/8.Communication Systems/1.Communication-Systems_Gate-ece-Notes-free1.pdf &middot; Study Notes &middot; 18.97 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/GATE%20ECE%20Notes/8.Communication%20Systems/1.Communication-Systems_Gate-ece-Notes-free1.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="2.communication-systems_gate-ece-notes-free2.pdf notes 📚/gate ece notes/8.communication systems/2.communication-systems_gate-ece-notes-free2.pdf signals and systems" data-category="Signals and Systems">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">2.Communication-Systems_Gate-ece-Notes-free2.pdf</div>
+    <div class="path">Notes 📚/GATE ECE Notes/8.Communication Systems/2.Communication-Systems_Gate-ece-Notes-free2.pdf &middot; Study Notes &middot; 1.63 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/GATE%20ECE%20Notes/8.Communication%20Systems/2.Communication-Systems_Gate-ece-Notes-free2.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="3.-signal-systems_final-with-link.pdf notes 📚/gate wallah__pw/3.-signal-systems_final-with-link.pdf signals and systems" data-category="Signals and Systems">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">3.-Signal-Systems_FINAL-with-LINK.pdf</div>
+    <div class="path">Notes 📚/GATE Wallah__PW/3.-Signal-Systems_FINAL-with-LINK.pdf &middot; Study Notes &middot; 2.95 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/GATE%20Wallah__PW/3.-Signal-Systems_FINAL-with-LINK.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="3-signal-system.pdf notes 📚/made easy notes all subjects__wordpress/3-signal-system.pdf signals and systems" data-category="Signals and Systems">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">3-signal-system.pdf</div>
+    <div class="path">Notes 📚/MADE EASY NOTES ALL SUBJECTS__WordPress/3-signal-system.pdf &middot; Study Notes &middot; 12.3 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/MADE%20EASY%20NOTES%20ALL%20SUBJECTS__WordPress/3-signal-system.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="[made easy] communication systems part 1.pdf notes 📚/made easy notes all subjects__wordpress/gate notes-2/[made easy] communication systems part 1.pdf signals and systems" data-category="Signals and Systems">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">[Made Easy] Communication Systems PART 1.pdf</div>
+    <div class="path">Notes 📚/MADE EASY NOTES ALL SUBJECTS__WordPress/GATE Notes-2/[Made Easy] Communication Systems PART 1.pdf &middot; Study Notes &middot; 13.69 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/MADE%20EASY%20NOTES%20ALL%20SUBJECTS__WordPress/GATE%20Notes-2/%5BMade%20Easy%5D%20Communication%20Systems%20PART%201.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="[made easy] communication systems part 2.pdf notes 📚/made easy notes all subjects__wordpress/gate notes-2/[made easy] communication systems part 2.pdf signals and systems" data-category="Signals and Systems">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">[Made Easy] Communication Systems PART 2.pdf</div>
+    <div class="path">Notes 📚/MADE EASY NOTES ALL SUBJECTS__WordPress/GATE Notes-2/[Made Easy] Communication Systems PART 2.pdf &middot; Study Notes &middot; 5.01 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/MADE%20EASY%20NOTES%20ALL%20SUBJECTS__WordPress/GATE%20Notes-2/%5BMade%20Easy%5D%20Communication%20Systems%20PART%202.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="[made easy] control systems - electronics engineering gate handwritten notes pdf download.pdf notes 📚/made easy notes all subjects__wordpress/gate notes-2/[made easy] control systems - electronics engineering gate handwritten notes pdf download.pdf signals and systems" data-category="Signals and Systems">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">[Made Easy] Control Systems - Electronics Engineering Gate Handwritten Notes PDF Download.pdf</div>
+    <div class="path">Notes 📚/MADE EASY NOTES ALL SUBJECTS__WordPress/GATE Notes-2/[Made Easy] Control Systems - Electronics Engineering Gate Handwritten Notes PDF Download.pdf &middot; Study Notes &middot; 8.66 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/MADE%20EASY%20NOTES%20ALL%20SUBJECTS__WordPress/GATE%20Notes-2/%5BMade%20Easy%5D%20Control%20Systems%20-%20Electronics%20Engineering%20Gate%20Handwritten%20Notes%20PDF%20Download.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ec_signals-and-systems gate previous questions with answers.pdf solved question paper/gate  ec chaptertopic-wise previous year solved questions (2010-2018)/ec_signals-and-systems gate previous questions with answers.pdf signals and systems" data-category="Signals and Systems">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">EC_Signals-and-Systems GATE Previous Questions with Answers.pdf</div>
+    <div class="path">Solved Question Paper/GATE  EC ChapterTopic-wise Previous Year Solved Questions (2010-2018)/EC_Signals-and-Systems GATE Previous Questions with Answers.pdf &middot; Study Notes &middot; 4.39 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/GATE%20%20EC%20ChapterTopic-wise%20Previous%20Year%20Solved%20Questions%20%282010-2018%29/EC_Signals-and-Systems%20GATE%20Previous%20Questions%20with%20Answers.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ec_signals-and-systems.pdf solved question paper/solved papers/ec_signals-and-systems.pdf signals and systems" data-category="Signals and Systems">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">EC_Signals-and-Systems.pdf</div>
+    <div class="path">Solved Question Paper/Solved Papers/EC_Signals-and-Systems.pdf &middot; Study Notes &middot; 0.47 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/Solved%20Papers/EC_Signals-and-Systems.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+</details><details open data-section="Electronic Devices">
+  <summary>Electronic Devices <span>3 files</span></summary>
+  <div class="row" data-name="2.electronic-devices_gate-ece-notes-free2.pdf adhil/gate material [github]/gate-prep-resources/electronic devices and circuits/2.electronic-devices_gate-ece-notes-free2.pdf electronic devices" data-category="Electronic Devices">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">2.Electronic-Devices_Gate-ece-Notes-free2.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Electronic devices and circuits/2.Electronic-Devices_Gate-ece-Notes-free2.pdf &middot; Study Notes &middot; 3.48 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Electronic%20devices%20and%20circuits/2.Electronic-Devices_Gate-ece-Notes-free2.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="1.electronic-devices_gate-ece-notes-free1.pdf notes 📚/gate ece notes/4.electronic devices and circuits/1.electronic-devices_gate-ece-notes-free1.pdf electronic devices" data-category="Electronic Devices">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">1.Electronic-Devices_Gate-ece-Notes-free1.pdf</div>
+    <div class="path">Notes 📚/GATE ECE Notes/4.Electronic Devices and Circuits/1.Electronic-Devices_Gate-ece-Notes-free1.pdf &middot; Study Notes &middot; 18.03 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/GATE%20ECE%20Notes/4.Electronic%20Devices%20and%20Circuits/1.Electronic-Devices_Gate-ece-Notes-free1.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="2.electronic-devices_gate-ece-notes-free2.pdf notes 📚/gate ece notes/4.electronic devices and circuits/2.electronic-devices_gate-ece-notes-free2.pdf electronic devices" data-category="Electronic Devices">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">2.Electronic-Devices_Gate-ece-Notes-free2.pdf</div>
+    <div class="path">Notes 📚/GATE ECE Notes/4.Electronic Devices and Circuits/2.Electronic-Devices_Gate-ece-Notes-free2.pdf &middot; Study Notes &middot; 1.79 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/GATE%20ECE%20Notes/4.Electronic%20Devices%20and%20Circuits/2.Electronic-Devices_Gate-ece-Notes-free2.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+</details><details open data-section="Analog Circuits">
+  <summary>Analog Circuits <span>16 files</span></summary>
+  <div class="row" data-name="0134420101.pdf adhil/gate material [github]/gate-prep-resources/analog electronics/0134420101.pdf analog circuits" data-category="Analog Circuits">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">0134420101.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Analog Electronics/0134420101.pdf &middot; Study Notes &middot; 3.9 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Analog%20Electronics/0134420101.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="analog_20circuits-ec.pdf.pdf adhil/gate material [github]/gate-prep-resources/analog electronics/analog_20circuits-ec.pdf.pdf analog circuits" data-category="Analog Circuits">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">Analog_20Circuits-EC.pdf.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Analog Electronics/Analog_20Circuits-EC.pdf.pdf &middot; Study Notes &middot; 10.56 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Analog%20Electronics/Analog_20Circuits-EC.pdf.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="analog_20electronics-ae-ec_20(questionpapershub.com).pdf.pdf adhil/gate material [github]/gate-prep-resources/analog electronics/analog_20electronics-ae-ec_20(questionpapershub.com).pdf.pdf analog circuits" data-category="Analog Circuits">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">Analog_20Electronics-AE-EC_20(questionpapershub.com).pdf.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Analog Electronics/Analog_20Electronics-AE-EC_20(questionpapershub.com).pdf.pdf &middot; Study Notes &middot; 12.52 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Analog%20Electronics/Analog_20Electronics-AE-EC_20%28questionpapershub.com%29.pdf.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ee_analog-and-digital-electronics-1.pdf adhil/gate material [github]/gate-prep-resources/analog electronics/ee_analog-and-digital-electronics-1.pdf analog circuits" data-category="Analog Circuits">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">EE_ANALOG-and-DIGITAL-ELECTRONICS-1.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Analog Electronics/EE_ANALOG-and-DIGITAL-ELECTRONICS-1.pdf &middot; Study Notes &middot; 3.36 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Analog%20Electronics/EE_ANALOG-and-DIGITAL-ELECTRONICS-1.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ee_gate_2004.pdf adhil/gate material [github]/gate-prep-resources/analog electronics/ee_gate_2004.pdf analog circuits" data-category="Analog Circuits">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">EE_GATE_2004.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Analog Electronics/EE_GATE_2004.pdf &middot; Study Notes &middot; 1.04 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Analog%20Electronics/EE_GATE_2004.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="note_1474205380.pdf adhil/gate material [github]/gate-prep-resources/analog electronics/note_1474205380.pdf analog circuits" data-category="Analog Circuits">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">note_1474205380.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Analog Electronics/note_1474205380.pdf &middot; Study Notes &middot; 0.81 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Analog%20Electronics/note_1474205380.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ace-analog-circuits-study-material.pdf notes 📚/ace materials, formulas__wordpress/ace-analog-circuits-study-material.pdf analog circuits" data-category="Analog Circuits">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">ace-analog-circuits-study-material.pdf</div>
+    <div class="path">Notes 📚/ACE MATERIALS, FORMULAS__WordPress/ace-analog-circuits-study-material.pdf &middot; Study Notes &middot; 1.63 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/ACE%20MATERIALS%2C%20FORMULAS__WordPress/ace-analog-circuits-study-material.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="analog electronics hand written notes for gate _ ies pdf download_part_1.pdf notes 📚/ace materials, formulas__wordpress/gate notes-1/analog electronics hand written notes for gate _ ies pdf download_part_1.pdf analog circuits" data-category="Analog Circuits">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">Analog Electronics Hand written Notes for GATE _ IES PDF Download_PART_1.pdf</div>
+    <div class="path">Notes 📚/ACE MATERIALS, FORMULAS__WordPress/GATE Notes-1/Analog Electronics Hand written Notes for GATE _ IES PDF Download_PART_1.pdf &middot; Study Notes &middot; 6.3 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/ACE%20MATERIALS%2C%20FORMULAS__WordPress/GATE%20Notes-1/Analog%20Electronics%20Hand%20written%20Notes%20for%20GATE%20_%20IES%20PDF%20Download_PART_1.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="analog electronics hand written notes for gate _ ies pdf download_part_2.pdf notes 📚/ace materials, formulas__wordpress/gate notes-1/analog electronics hand written notes for gate _ ies pdf download_part_2.pdf analog circuits" data-category="Analog Circuits">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">Analog Electronics Hand written Notes for GATE _ IES PDF Download_PART_2.pdf</div>
+    <div class="path">Notes 📚/ACE MATERIALS, FORMULAS__WordPress/GATE Notes-1/Analog Electronics Hand written Notes for GATE _ IES PDF Download_PART_2.pdf &middot; Study Notes &middot; 6.52 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/ACE%20MATERIALS%2C%20FORMULAS__WordPress/GATE%20Notes-1/Analog%20Electronics%20Hand%20written%20Notes%20for%20GATE%20_%20IES%20PDF%20Download_PART_2.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="1.analog-electronics_gate-ece-notes-free1.pdf.pdf notes 📚/gate ece notes/5.analog circuits/1.analog-electronics_gate-ece-notes-free1.pdf.pdf analog circuits" data-category="Analog Circuits">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">1.Analog-Electronics_Gate-ece-Notes-free1.pdf.pdf</div>
+    <div class="path">Notes 📚/GATE ECE Notes/5.Analog Circuits/1.Analog-Electronics_Gate-ece-Notes-free1.pdf.pdf &middot; Study Notes &middot; 12.42 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/GATE%20ECE%20Notes/5.Analog%20Circuits/1.Analog-Electronics_Gate-ece-Notes-free1.pdf.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="2.analog-electronics_gate-ece-notes-free2.pdf notes 📚/gate ece notes/5.analog circuits/2.analog-electronics_gate-ece-notes-free2.pdf analog circuits" data-category="Analog Circuits">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">2.Analog-Electronics_Gate-ece-Notes-free2.pdf</div>
+    <div class="path">Notes 📚/GATE ECE Notes/5.Analog Circuits/2.Analog-Electronics_Gate-ece-Notes-free2.pdf &middot; Study Notes &middot; 1.63 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/GATE%20ECE%20Notes/5.Analog%20Circuits/2.Analog-Electronics_Gate-ece-Notes-free2.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="7.-analog-electronics_updated_final_with-link.pdf notes 📚/gate wallah__pw/7.-analog-electronics_updated_final_with-link.pdf analog circuits" data-category="Analog Circuits">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">7.-Analog-Electronics_Updated_FINAL_with-LINK.pdf</div>
+    <div class="path">Notes 📚/GATE Wallah__PW/7.-Analog-Electronics_Updated_FINAL_with-LINK.pdf &middot; Study Notes &middot; 3.15 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/GATE%20Wallah__PW/7.-Analog-Electronics_Updated_FINAL_with-LINK.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="2-analog__electronics.pdf notes 📚/made easy notes all subjects__wordpress/2-analog__electronics.pdf analog circuits" data-category="Analog Circuits">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">2-analog__electronics.pdf</div>
+    <div class="path">Notes 📚/MADE EASY NOTES ALL SUBJECTS__WordPress/2-analog__electronics.pdf &middot; Study Notes &middot; 12.42 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/MADE%20EASY%20NOTES%20ALL%20SUBJECTS__WordPress/2-analog__electronics.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="[made easy] analog electronics   electronics engineering gate handwritten notes pdf downlo.pdf notes 📚/made easy notes all subjects__wordpress/gate notes-2/[made easy] analog electronics - electronics engineering gate handwritten notes pdf download.pdf analog circuits" data-category="Analog Circuits">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">[Made Easy] Analog Electronics   Electronics Engineering Gate Handwritten Notes PDF Downlo.pdf</div>
+    <div class="path">Notes 📚/MADE EASY NOTES ALL SUBJECTS__WordPress/GATE Notes-2/[Made Easy] Analog Electronics - Electronics Engineering Gate Handwritten Notes PDF Download.pdf &middot; Study Notes &middot; 13.3 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/MADE%20EASY%20NOTES%20ALL%20SUBJECTS__WordPress/GATE%20Notes-2/%5BMade%20Easy%5D%20Analog%20Electronics%20-%20Electronics%20Engineering%20Gate%20Handwritten%20Notes%20PDF%20Download.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ec_analog-electronic gate previous questions with answers.pdf solved question paper/gate  ec chaptertopic-wise previous year solved questions (2010-2018)/ec_analog-electronic gate previous questions with answers.pdf analog circuits" data-category="Analog Circuits">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">EC_Analog-Electronic GATE Previous Questions with Answers.pdf</div>
+    <div class="path">Solved Question Paper/GATE  EC ChapterTopic-wise Previous Year Solved Questions (2010-2018)/EC_Analog-Electronic GATE Previous Questions with Answers.pdf &middot; Study Notes &middot; 6.24 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/GATE%20%20EC%20ChapterTopic-wise%20Previous%20Year%20Solved%20Questions%20%282010-2018%29/EC_Analog-Electronic%20GATE%20Previous%20Questions%20with%20Answers.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ec_analog-electronic.pdf solved question paper/solved papers/ec_analog-electronic.pdf analog circuits" data-category="Analog Circuits">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">EC_Analog-Electronic.pdf</div>
+    <div class="path">Solved Question Paper/Solved Papers/EC_Analog-Electronic.pdf &middot; Study Notes &middot; 1.84 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/Solved%20Papers/EC_Analog-Electronic.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+</details><details open data-section="Digital Circuits">
+  <summary>Digital Circuits <span>12 files</span></summary>
+  <div class="row" data-name="1.digital-electronics_gate-ece-notes-free1.pdf.pdf adhil/gate material [github]/gate-prep-resources/digital electronics/1.digital-electronics_gate-ece-notes-free1.pdf.pdf digital circuits" data-category="Digital Circuits">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">1.Digital-Electronics_Gate-ece-Notes-free1.pdf.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Digital electronics/1.Digital-Electronics_Gate-ece-Notes-free1.pdf.pdf &middot; Study Notes &middot; 13.14 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Digital%20electronics/1.Digital-Electronics_Gate-ece-Notes-free1.pdf.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="2.digital-electronics_gate-ece-notes-free2.pdf.pdf adhil/gate material [github]/gate-prep-resources/digital electronics/2.digital-electronics_gate-ece-notes-free2.pdf.pdf digital circuits" data-category="Digital Circuits">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">2.Digital-Electronics_Gate-ece-Notes-free2.pdf.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Digital electronics/2.Digital-Electronics_Gate-ece-Notes-free2.pdf.pdf &middot; Study Notes &middot; 2.52 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Digital%20electronics/2.Digital-Electronics_Gate-ece-Notes-free2.pdf.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="8085instructionsdetail.pdf adhil/gate material [github]/gate-prep-resources/digital electronics/8085instructionsdetail.pdf digital circuits" data-category="Digital Circuits">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">8085instructionsdetail.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Digital electronics/8085instructionsdetail.pdf &middot; Study Notes &middot; 0.15 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Digital%20electronics/8085instructionsdetail.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="digital-electronics-microprocessors.pdf notes 📚/ace materials, formulas__wordpress/digital-electronics-microprocessors.pdf digital circuits" data-category="Digital Circuits">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">digital-electronics-microprocessors.pdf</div>
+    <div class="path">Notes 📚/ACE MATERIALS, FORMULAS__WordPress/digital-electronics-microprocessors.pdf &middot; Study Notes &middot; 1.64 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/ACE%20MATERIALS%2C%20FORMULAS__WordPress/digital-electronics-microprocessors.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="digital electronics hand written notes for gate pdf download.pdf notes 📚/ace materials, formulas__wordpress/gate notes-1/digital electronics hand written notes for gate pdf download.pdf digital circuits" data-category="Digital Circuits">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">Digital Electronics Hand Written Notes for GATE PDF Download.pdf</div>
+    <div class="path">Notes 📚/ACE MATERIALS, FORMULAS__WordPress/GATE Notes-1/Digital Electronics Hand Written Notes for GATE PDF Download.pdf &middot; Study Notes &middot; 2.91 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/ACE%20MATERIALS%2C%20FORMULAS__WordPress/GATE%20Notes-1/Digital%20Electronics%20Hand%20Written%20Notes%20for%20GATE%20PDF%20Download.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="digital logic _ digital electronics notes for gate pdf download.pdf notes 📚/ace materials, formulas__wordpress/gate notes-1/digital logic _ digital electronics notes for gate pdf download.pdf digital circuits" data-category="Digital Circuits">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">Digital Logic _ Digital Electronics Notes for GATE PDF Download.pdf</div>
+    <div class="path">Notes 📚/ACE MATERIALS, FORMULAS__WordPress/GATE Notes-1/Digital Logic _ Digital Electronics Notes for GATE PDF Download.pdf &middot; Study Notes &middot; 9.39 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/ACE%20MATERIALS%2C%20FORMULAS__WordPress/GATE%20Notes-1/Digital%20Logic%20_%20Digital%20Electronics%20Notes%20for%20GATE%20PDF%20Download.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="1.digital-electronics_gate-ece-notes-free1.pdf.pdf notes 📚/gate ece notes/6.digital circuits/1.digital-electronics_gate-ece-notes-free1.pdf.pdf digital circuits" data-category="Digital Circuits">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">1.Digital-Electronics_Gate-ece-Notes-free1.pdf.pdf</div>
+    <div class="path">Notes 📚/GATE ECE Notes/6.Digital Circuits/1.Digital-Electronics_Gate-ece-Notes-free1.pdf.pdf &middot; Study Notes &middot; 13.1 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/GATE%20ECE%20Notes/6.Digital%20Circuits/1.Digital-Electronics_Gate-ece-Notes-free1.pdf.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="2.digital-electronics_gate-ece-notes-free2.pdf.pdf notes 📚/gate ece notes/6.digital circuits/2.digital-electronics_gate-ece-notes-free2.pdf.pdf digital circuits" data-category="Digital Circuits">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">2.Digital-Electronics_Gate-ece-Notes-free2.pdf.pdf</div>
+    <div class="path">Notes 📚/GATE ECE Notes/6.Digital Circuits/2.Digital-Electronics_Gate-ece-Notes-free2.pdf.pdf &middot; Study Notes &middot; 1.64 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/GATE%20ECE%20Notes/6.Digital%20Circuits/2.Digital-Electronics_Gate-ece-Notes-free2.pdf.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="5.-digital-electronics_final_with-link.pdf notes 📚/gate wallah__pw/5.-digital-electronics_final_with-link.pdf digital circuits" data-category="Digital Circuits">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">5.-Digital-Electronics_FINAL_with-Link.pdf</div>
+    <div class="path">Notes 📚/GATE Wallah__PW/5.-Digital-Electronics_FINAL_with-Link.pdf &middot; Study Notes &middot; 7.87 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/GATE%20Wallah__PW/5.-Digital-Electronics_FINAL_with-Link.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="8-digital_electronicsss.pdf notes 📚/made easy notes all subjects__wordpress/8-digital_electronicsss.pdf digital circuits" data-category="Digital Circuits">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">8-digital_electronicsss.pdf</div>
+    <div class="path">Notes 📚/MADE EASY NOTES ALL SUBJECTS__WordPress/8-digital_electronicsss.pdf &middot; Study Notes &middot; 13.1 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/MADE%20EASY%20NOTES%20ALL%20SUBJECTS__WordPress/8-digital_electronicsss.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ec_digital-circuits gate previous questions with answers.pdf solved question paper/gate  ec chaptertopic-wise previous year solved questions (2010-2018)/ec_digital-circuits gate previous questions with answers.pdf digital circuits" data-category="Digital Circuits">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">EC_Digital-Circuits GATE Previous Questions with Answers.pdf</div>
+    <div class="path">Solved Question Paper/GATE  EC ChapterTopic-wise Previous Year Solved Questions (2010-2018)/EC_Digital-Circuits GATE Previous Questions with Answers.pdf &middot; Study Notes &middot; 5.85 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/GATE%20%20EC%20ChapterTopic-wise%20Previous%20Year%20Solved%20Questions%20%282010-2018%29/EC_Digital-Circuits%20GATE%20Previous%20Questions%20with%20Answers.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ec_digital-circuits.pdf solved question paper/solved papers/ec_digital-circuits.pdf digital circuits" data-category="Digital Circuits">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">EC_Digital-Circuits.pdf</div>
+    <div class="path">Solved Question Paper/Solved Papers/EC_Digital-Circuits.pdf &middot; Study Notes &middot; 1.48 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/Solved%20Papers/EC_Digital-Circuits.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+</details><details open data-section="Control Systems">
+  <summary>Control Systems <span>4 files</span></summary>
+  <div class="row" data-name="4.-control-system_final_link-updated.pdf notes 📚/gate wallah__pw/4.-control-system_final_link-updated.pdf control systems" data-category="Control Systems">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">4.-Control-System_FINAL_Link-Updated.pdf</div>
+    <div class="path">Notes 📚/GATE Wallah__PW/4.-Control-System_FINAL_Link-Updated.pdf &middot; Study Notes &middot; 4.45 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/GATE%20Wallah__PW/4.-Control-System_FINAL_Link-Updated.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="6-control_system.pdf notes 📚/made easy notes all subjects__wordpress/6-control_system.pdf control systems" data-category="Control Systems">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">6-control_system.pdf</div>
+    <div class="path">Notes 📚/MADE EASY NOTES ALL SUBJECTS__WordPress/6-control_system.pdf &middot; Study Notes &middot; 13.59 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/MADE%20EASY%20NOTES%20ALL%20SUBJECTS__WordPress/6-control_system.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ec_control-system gate previous questions with answers.pdf solved question paper/gate  ec chaptertopic-wise previous year solved questions (2010-2018)/ec_control-system gate previous questions with answers.pdf control systems" data-category="Control Systems">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">EC_Control-System GATE Previous Questions with Answers.pdf</div>
+    <div class="path">Solved Question Paper/GATE  EC ChapterTopic-wise Previous Year Solved Questions (2010-2018)/EC_Control-System GATE Previous Questions with Answers.pdf &middot; Study Notes &middot; 4.82 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/GATE%20%20EC%20ChapterTopic-wise%20Previous%20Year%20Solved%20Questions%20%282010-2018%29/EC_Control-System%20GATE%20Previous%20Questions%20with%20Answers.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ec_control-system.pdf solved question paper/solved papers/ec_control-system.pdf control systems" data-category="Control Systems">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">EC_Control-System.pdf</div>
+    <div class="path">Solved Question Paper/Solved Papers/EC_Control-System.pdf &middot; Study Notes &middot; 0.94 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/Solved%20Papers/EC_Control-System.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+</details><details open data-section="Communications">
+  <summary>Communications <span>7 files</span></summary>
+  <div class="row" data-name="8.-communication-system_updated_with-link.pdf notes 📚/gate wallah__pw/8.-communication-system_updated_with-link.pdf communications" data-category="Communications">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">8.-Communication-System_Updated_With-LINK.pdf</div>
+    <div class="path">Notes 📚/GATE Wallah__PW/8.-Communication-System_Updated_With-LINK.pdf &middot; Study Notes &middot; 3.51 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/GATE%20Wallah__PW/8.-Communication-System_Updated_With-LINK.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="4-communication_system.pdf notes 📚/made easy notes all subjects__wordpress/4-communication_system.pdf communications" data-category="Communications">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">4-communication_system.pdf</div>
+    <div class="path">Notes 📚/MADE EASY NOTES ALL SUBJECTS__WordPress/4-communication_system.pdf &middot; Study Notes &middot; 18.95 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/MADE%20EASY%20NOTES%20ALL%20SUBJECTS__WordPress/4-communication_system.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ec_communication-system gate previous questions with answers.pdf solved question paper/gate  ec chaptertopic-wise previous year solved questions (2010-2018)/ec_communication-system gate previous questions with answers.pdf communications" data-category="Communications">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">EC_Communication-System GATE Previous Questions with Answers.pdf</div>
+    <div class="path">Solved Question Paper/GATE  EC ChapterTopic-wise Previous Year Solved Questions (2010-2018)/EC_Communication-System GATE Previous Questions with Answers.pdf &middot; Study Notes &middot; 6.03 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/GATE%20%20EC%20ChapterTopic-wise%20Previous%20Year%20Solved%20Questions%20%282010-2018%29/EC_Communication-System%20GATE%20Previous%20Questions%20with%20Answers.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="gate 2015 - electronics _ communications engineering question paper with solution.pdf.pdf.pdf solved question paper/gate ec 2010-2024 paper solution/2015/gate 2015 - electronics _ communications engineering question paper with solution.pdf.pdf.pdf communications" data-category="Communications">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">GATE 2015 - Electronics _ Communications Engineering Question Paper with Solution.pdf.pdf.pdf</div>
+    <div class="path">Solved Question Paper/GATE EC 2010-2024 Paper Solution/2015/GATE 2015 - Electronics _ Communications Engineering Question Paper with Solution.pdf.pdf.pdf &middot; Study Notes &middot; 2.98 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/GATE%20EC%202010-2024%20Paper%20Solution/2015/GATE%202015%20-%20Electronics%20_%20Communications%20Engineering%20Question%20Paper%20with%20Solution.pdf.pdf.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="gate 2016 - electronics _ communications engineering question paper with solution.pdf.pdf.pdf solved question paper/gate ec 2010-2024 paper solution/2016/gate 2016 - electronics _ communications engineering question paper with solution.pdf.pdf.pdf communications" data-category="Communications">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">GATE 2016 - Electronics _ Communications Engineering Question Paper with Solution.pdf.pdf.pdf</div>
+    <div class="path">Solved Question Paper/GATE EC 2010-2024 Paper Solution/2016/GATE 2016 - Electronics _ Communications Engineering Question Paper with Solution.pdf.pdf.pdf &middot; Study Notes &middot; 3.48 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/GATE%20EC%202010-2024%20Paper%20Solution/2016/GATE%202016%20-%20Electronics%20_%20Communications%20Engineering%20Question%20Paper%20with%20Solution.pdf.pdf.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="gate 2018 mock test - electronics _ communication engineering sample paper with answer key.pdf solved question paper/gate ec 2010-2024 paper solution/2018/gate 2018 mock test - electronics _ communication engineering sample paper with answer key.pdf communications" data-category="Communications">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">GATE 2018 Mock Test - Electronics _ Communication Engineering Sample Paper with Answer Key.pdf</div>
+    <div class="path">Solved Question Paper/GATE EC 2010-2024 Paper Solution/2018/GATE 2018 Mock Test - Electronics _ Communication Engineering Sample Paper with Answer Key.pdf &middot; Study Notes &middot; 0.71 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/GATE%20EC%202010-2024%20Paper%20Solution/2018/GATE%202018%20Mock%20Test%20-%20Electronics%20_%20Communication%20Engineering%20Sample%20Paper%20with%20Answer%20Key.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ec_communication-system.pdf solved question paper/solved papers/ec_communication-system.pdf communications" data-category="Communications">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">EC_Communication-System.pdf</div>
+    <div class="path">Solved Question Paper/Solved Papers/EC_Communication-System.pdf &middot; Study Notes &middot; 1.11 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/Solved%20Papers/EC_Communication-System.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+</details><details open data-section="Electromagnetics">
+  <summary>Electromagnetics <span>8 files</span></summary>
+  <div class="row" data-name="2.electromagnetic-theory_gate-ece-notes-free2.pdf adhil/gate material [github]/gate-prep-resources/electromagnetic theory/2.electromagnetic-theory_gate-ece-notes-free2.pdf electromagnetics" data-category="Electromagnetics">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">2.Electromagnetic-Theory_Gate-ece-Notes-free2.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Electromagnetic theory/2.Electromagnetic-Theory_Gate-ece-Notes-free2.pdf &middot; Study Notes &middot; 1.75 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Electromagnetic%20theory/2.Electromagnetic-Theory_Gate-ece-Notes-free2.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="3.electromagnetic theory_gate.pdf adhil/gate material [github]/gate-prep-resources/electromagnetic theory/3.electromagnetic theory_gate.pdf electromagnetics" data-category="Electromagnetics">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">3.Electromagnetic Theory_GATE.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Electromagnetic theory/3.Electromagnetic Theory_GATE.pdf &middot; Study Notes &middot; 0.92 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Electromagnetic%20theory/3.Electromagnetic%20Theory_GATE.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="electromagnetic_sadiku_pdf.pdf adhil/gate material [github]/gate-prep-resources/electromagnetic theory/electromagnetic_sadiku_pdf.pdf electromagnetics" data-category="Electromagnetics">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">Electromagnetic_Sadiku_Pdf.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Electromagnetic theory/Electromagnetic_Sadiku_Pdf.pdf &middot; Study Notes &middot; 38.49 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Electromagnetic%20theory/Electromagnetic_Sadiku_Pdf.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="1.electromagnetic-theory_gate-ece-notes-free1.pdf notes 📚/gate ece notes/2.electromagnetics notes/1.electromagnetic-theory_gate-ece-notes-free1.pdf electromagnetics" data-category="Electromagnetics">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">1.Electromagnetic-Theory_Gate-ece-Notes-free1.pdf</div>
+    <div class="path">Notes 📚/GATE ECE Notes/2.Electromagnetics Notes/1.Electromagnetic-Theory_Gate-ece-Notes-free1.pdf &middot; Study Notes &middot; 21.44 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/GATE%20ECE%20Notes/2.Electromagnetics%20Notes/1.Electromagnetic-Theory_Gate-ece-Notes-free1.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="2.electromagnetic-theory_gate-ece-notes-free2.pdf notes 📚/gate ece notes/2.electromagnetics notes/2.electromagnetic-theory_gate-ece-notes-free2.pdf electromagnetics" data-category="Electromagnetics">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">2.Electromagnetic-Theory_Gate-ece-Notes-free2.pdf</div>
+    <div class="path">Notes 📚/GATE ECE Notes/2.Electromagnetics Notes/2.Electromagnetic-Theory_Gate-ece-Notes-free2.pdf &middot; Study Notes &middot; 1.7 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/GATE%20ECE%20Notes/2.Electromagnetics%20Notes/2.Electromagnetic-Theory_Gate-ece-Notes-free2.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="9.-emft_final-ece.pdf notes 📚/gate wallah__pw/9.-emft_final-ece.pdf electromagnetics" data-category="Electromagnetics">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">9.-EMFT_FINAL-ECE.pdf</div>
+    <div class="path">Notes 📚/GATE Wallah__PW/9.-EMFT_FINAL-ECE.pdf &middot; Study Notes &middot; 9.93 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/GATE%20Wallah__PW/9.-EMFT_FINAL-ECE.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ec_electromagnetics gate previous questions with answers.pdf solved question paper/gate  ec chaptertopic-wise previous year solved questions (2010-2018)/ec_electromagnetics gate previous questions with answers.pdf electromagnetics" data-category="Electromagnetics">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">EC_Electromagnetics GATE Previous Questions with Answers.pdf</div>
+    <div class="path">Solved Question Paper/GATE  EC ChapterTopic-wise Previous Year Solved Questions (2010-2018)/EC_Electromagnetics GATE Previous Questions with Answers.pdf &middot; Study Notes &middot; 4.53 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/GATE%20%20EC%20ChapterTopic-wise%20Previous%20Year%20Solved%20Questions%20%282010-2018%29/EC_Electromagnetics%20GATE%20Previous%20Questions%20with%20Answers.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ec_electromagnetics.pdf solved question paper/solved papers/ec_electromagnetics.pdf electromagnetics" data-category="Electromagnetics">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">EC_Electromagnetics.pdf</div>
+    <div class="path">Solved Question Paper/Solved Papers/EC_Electromagnetics.pdf &middot; Study Notes &middot; 0.62 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/Solved%20Papers/EC_Electromagnetics.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+</details><details open data-section="Previous Year / Solved Papers">
+  <summary>Previous Year / Solved Papers <span>57 files</span></summary>
+  <div class="row" data-name="152ec277-049f-4e31-9167-35677194f584.png adhil/gate material [github]/gate-prep-resources/previous year papers/152ec277-049f-4e31-9167-35677194f584.png previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PNG</div>
+  <div>
+    <div class="file-name">152EC277-049F-4E31-9167-35677194F584.png</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Previous year papers/152EC277-049F-4E31-9167-35677194F584.png &middot; Solved Paper &middot; 0.29 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Previous%20year%20papers/152EC277-049F-4E31-9167-35677194F584.png" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="2db16f5a-1aa1-4deb-98a6-d2072c34b3be.png adhil/gate material [github]/gate-prep-resources/previous year papers/2db16f5a-1aa1-4deb-98a6-d2072c34b3be.png previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PNG</div>
+  <div>
+    <div class="file-name">2DB16F5A-1AA1-4DEB-98A6-D2072C34B3BE.png</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Previous year papers/2DB16F5A-1AA1-4DEB-98A6-D2072C34B3BE.png &middot; Solved Paper &middot; 0.28 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Previous%20year%20papers/2DB16F5A-1AA1-4DEB-98A6-D2072C34B3BE.png" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ec_set-1-31st-january-forenoon-session.pdf adhil/gate material [github]/gate-prep-resources/previous year papers/ec_set-1-31st-january-forenoon-session.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">EC_SET-1-31st-January-Forenoon-Session.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Previous year papers/EC_SET-1-31st-January-Forenoon-Session.pdf &middot; Solved Paper &middot; 1.1 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Previous%20year%20papers/EC_SET-1-31st-January-Forenoon-Session.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ece-_gate-16_-set-1corrected-2nd-time.pdf adhil/gate material [github]/gate-prep-resources/previous year papers/ece-_gate-16_-set-1corrected-2nd-time.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">ECE-_Gate-16_-set-1Corrected-2nd-Time.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Previous year papers/ECE-_Gate-16_-set-1Corrected-2nd-Time.pdf &middot; Solved Paper &middot; 1.56 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Previous%20year%20papers/ECE-_Gate-16_-set-1Corrected-2nd-Time.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="f06d5037-f569-4098-be91-3616e1f0d157.png adhil/gate material [github]/gate-prep-resources/previous year papers/f06d5037-f569-4098-be91-3616e1f0d157.png previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PNG</div>
+  <div>
+    <div class="file-name">F06D5037-F569-4098-BE91-3616E1F0D157.png</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Previous year papers/F06D5037-F569-4098-BE91-3616E1F0D157.png &middot; Solved Paper &middot; 0.28 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Previous%20year%20papers/F06D5037-F569-4098-BE91-3616E1F0D157.png" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="gate 2016.pdf adhil/gate material [github]/gate-prep-resources/previous year papers/gate 2016.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">Gate 2016.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Previous year papers/Gate 2016.pdf &middot; Solved Paper &middot; 1.6 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Previous%20year%20papers/Gate%202016.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="gate 2017.pdf adhil/gate material [github]/gate-prep-resources/previous year papers/gate 2017.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">Gate 2017.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Previous year papers/Gate 2017.pdf &middot; Solved Paper &middot; 8.43 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Previous%20year%20papers/Gate%202017.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="gate 2018 solution .pdf adhil/gate material [github]/gate-prep-resources/previous year papers/gate 2018 solution .pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">Gate 2018 solution .pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Previous year papers/Gate 2018 solution .pdf &middot; Solved Paper &middot; 0.75 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Previous%20year%20papers/Gate%202018%20solution%20.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="gate 2018.pdf adhil/gate material [github]/gate-prep-resources/previous year papers/gate 2018.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">Gate 2018.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Previous year papers/Gate 2018.pdf &middot; Solved Paper &middot; 1.0 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Previous%20year%20papers/Gate%202018.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="gate 2019.pdf adhil/gate material [github]/gate-prep-resources/previous year papers/gate 2019.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">Gate 2019.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Previous year papers/Gate 2019.pdf &middot; Solved Paper &middot; 7.26 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Previous%20year%20papers/Gate%202019.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="gate 2020.pdf adhil/gate material [github]/gate-prep-resources/previous year papers/gate 2020.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">Gate 2020.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Previous year papers/Gate 2020.pdf &middot; Solved Paper &middot; 6.63 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Previous%20year%20papers/Gate%202020.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="gate 2021.pdf adhil/gate material [github]/gate-prep-resources/previous year papers/gate 2021.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">Gate 2021.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Previous year papers/Gate 2021.pdf &middot; Solved Paper &middot; 11.64 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Previous%20year%20papers/Gate%202021.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="gate 2022.pdf adhil/gate material [github]/gate-prep-resources/previous year papers/gate 2022.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">Gate 2022.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Previous year papers/Gate 2022.pdf &middot; Solved Paper &middot; 3.48 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Previous%20year%20papers/Gate%202022.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="gate 2023.pdf adhil/gate material [github]/gate-prep-resources/previous year papers/gate 2023.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">Gate 2023.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Previous year papers/Gate 2023.pdf &middot; Solved Paper &middot; 13.71 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Previous%20year%20papers/Gate%202023.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="safari.pdf adhil/gate material [github]/gate-prep-resources/previous year papers/safari.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">Safari.pdf</div>
+    <div class="path">Adhil/GATE Material [Github]/GATE-PREP-RESOURCES/Previous year papers/Safari.pdf &middot; Solved Paper &middot; 5.33 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/GATE-PREP-RESOURCES/Previous%20year%20papers/Safari.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ec_electronic-devices gate previous questions with answers.pdf solved question paper/gate  ec chaptertopic-wise previous year solved questions (2010-2018)/ec_electronic-devices gate previous questions with answers.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">EC_Electronic-Devices GATE Previous Questions with Answers.pdf</div>
+    <div class="path">Solved Question Paper/GATE  EC ChapterTopic-wise Previous Year Solved Questions (2010-2018)/EC_Electronic-Devices GATE Previous Questions with Answers.pdf &middot; Solved Paper &middot; 3.59 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/GATE%20%20EC%20ChapterTopic-wise%20Previous%20Year%20Solved%20Questions%20%282010-2018%29/EC_Electronic-Devices%20GATE%20Previous%20Questions%20with%20Answers.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ec_general-apitude gate previous questions with answers (1).pdf solved question paper/gate  ec chaptertopic-wise previous year solved questions (2010-2018)/ec_general-apitude gate previous questions with answers (1).pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">EC_General-Apitude GATE Previous Questions with Answers (1).pdf</div>
+    <div class="path">Solved Question Paper/GATE  EC ChapterTopic-wise Previous Year Solved Questions (2010-2018)/EC_General-Apitude GATE Previous Questions with Answers (1).pdf &middot; Solved Paper &middot; 1.8 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/GATE%20%20EC%20ChapterTopic-wise%20Previous%20Year%20Solved%20Questions%20%282010-2018%29/EC_General-Apitude%20GATE%20Previous%20Questions%20with%20Answers%20%281%29.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ec_general-apitude gate previous questions with answers.pdf solved question paper/gate  ec chaptertopic-wise previous year solved questions (2010-2018)/ec_general-apitude gate previous questions with answers.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">EC_General-Apitude GATE Previous Questions with Answers.pdf</div>
+    <div class="path">Solved Question Paper/GATE  EC ChapterTopic-wise Previous Year Solved Questions (2010-2018)/EC_General-Apitude GATE Previous Questions with Answers.pdf &middot; Solved Paper &middot; 1.8 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/GATE%20%20EC%20ChapterTopic-wise%20Previous%20Year%20Solved%20Questions%20%282010-2018%29/EC_General-Apitude%20GATE%20Previous%20Questions%20with%20Answers.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ec-2010.pdf solved question paper/gate ec 2010-2024 paper solution/2010/ec-2010.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">EC-2010.pdf</div>
+    <div class="path">Solved Question Paper/GATE EC 2010-2024 Paper Solution/2010/EC-2010.pdf &middot; Solved Paper &middot; 0.44 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/GATE%20EC%202010-2024%20Paper%20Solution/2010/EC-2010.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ec-gate-2011.pdf solved question paper/gate ec 2010-2024 paper solution/2011/ec-gate-2011.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">EC-GATE-2011.pdf</div>
+    <div class="path">Solved Question Paper/GATE EC 2010-2024 Paper Solution/2011/EC-GATE-2011.pdf &middot; Solved Paper &middot; 0.32 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/GATE%20EC%202010-2024%20Paper%20Solution/2011/EC-GATE-2011.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ec-gate-2012.pdf solved question paper/gate ec 2010-2024 paper solution/2012/ec-gate-2012.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">EC-GATE-2012.pdf</div>
+    <div class="path">Solved Question Paper/GATE EC 2010-2024 Paper Solution/2012/EC-GATE-2012.pdf &middot; Solved Paper &middot; 2.13 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/GATE%20EC%202010-2024%20Paper%20Solution/2012/EC-GATE-2012.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="gate2013_ec.pdf solved question paper/gate ec 2010-2024 paper solution/2013/gate2013_ec.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">GATE2013_EC.pdf</div>
+    <div class="path">Solved Question Paper/GATE EC 2010-2024 Paper Solution/2013/GATE2013_EC.pdf &middot; Solved Paper &middot; 0.19 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/GATE%20EC%202010-2024%20Paper%20Solution/2013/GATE2013_EC.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ec_2014.pdf solved question paper/gate ec 2010-2024 paper solution/2014/ec_2014.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">ec_2014.pdf</div>
+    <div class="path">Solved Question Paper/GATE EC 2010-2024 Paper Solution/2014/ec_2014.pdf &middot; Solved Paper &middot; 2.83 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/GATE%20EC%202010-2024%20Paper%20Solution/2014/ec_2014.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ec_set_1_gate_2015.pdf solved question paper/gate ec 2010-2024 paper solution/2015/ec_set_1_gate_2015.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">EC_SET_1_GATE_2015.pdf</div>
+    <div class="path">Solved Question Paper/GATE EC 2010-2024 Paper Solution/2015/EC_SET_1_GATE_2015.pdf &middot; Solved Paper &middot; 0.23 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/GATE%20EC%202010-2024%20Paper%20Solution/2015/EC_SET_1_GATE_2015.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ec_set_2_gate_2015.pdf solved question paper/gate ec 2010-2024 paper solution/2015/ec_set_2_gate_2015.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">EC_SET_2_GATE_2015.pdf</div>
+    <div class="path">Solved Question Paper/GATE EC 2010-2024 Paper Solution/2015/EC_SET_2_GATE_2015.pdf &middot; Solved Paper &middot; 0.28 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/GATE%20EC%202010-2024%20Paper%20Solution/2015/EC_SET_2_GATE_2015.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ec_set_3_gate_2015.pdf solved question paper/gate ec 2010-2024 paper solution/2015/ec_set_3_gate_2015.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">EC_SET_3_GATE_2015.pdf</div>
+    <div class="path">Solved Question Paper/GATE EC 2010-2024 Paper Solution/2015/EC_SET_3_GATE_2015.pdf &middot; Solved Paper &middot; 0.3 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/GATE%20EC%202010-2024%20Paper%20Solution/2015/EC_SET_3_GATE_2015.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ece-_gate-16_-set-1corrected-2nd-time.pdf solved question paper/gate ec 2010-2024 paper solution/2016/ece-_gate-16_-set-1corrected-2nd-time.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">ECE-_Gate-16_-set-1Corrected-2nd-Time.pdf</div>
+    <div class="path">Solved Question Paper/GATE EC 2010-2024 Paper Solution/2016/ECE-_Gate-16_-set-1Corrected-2nd-Time.pdf &middot; Solved Paper &middot; 1.56 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/GATE%20EC%202010-2024%20Paper%20Solution/2016/ECE-_Gate-16_-set-1Corrected-2nd-Time.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ece-_gate-16_-set-2.pdf solved question paper/gate ec 2010-2024 paper solution/2016/ece-_gate-16_-set-2.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">ECE-_Gate-16_-set-2.pdf</div>
+    <div class="path">Solved Question Paper/GATE EC 2010-2024 Paper Solution/2016/ECE-_Gate-16_-set-2.pdf &middot; Solved Paper &middot; 1.61 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/GATE%20EC%202010-2024%20Paper%20Solution/2016/ECE-_Gate-16_-set-2.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ece-_gate-16_-set-3-corrected.pdf solved question paper/gate ec 2010-2024 paper solution/2016/ece-_gate-16_-set-3-corrected.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">ECE-_Gate-16_-set-3-Corrected.pdf</div>
+    <div class="path">Solved Question Paper/GATE EC 2010-2024 Paper Solution/2016/ECE-_Gate-16_-set-3-Corrected.pdf &middot; Solved Paper &middot; 1.62 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/GATE%20EC%202010-2024%20Paper%20Solution/2016/ECE-_Gate-16_-set-3-Corrected.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="s1_ec.pdf solved question paper/gate ec 2010-2024 paper solution/2016/s1_ec.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">S1_EC.pdf</div>
+    <div class="path">Solved Question Paper/GATE EC 2010-2024 Paper Solution/2016/S1_EC.pdf &middot; Solved Paper &middot; 1.0 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/GATE%20EC%202010-2024%20Paper%20Solution/2016/S1_EC.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="s3_ec.pdf solved question paper/gate ec 2010-2024 paper solution/2016/s3_ec.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">S3_EC.pdf</div>
+    <div class="path">Solved Question Paper/GATE EC 2010-2024 Paper Solution/2016/S3_EC.pdf &middot; Solved Paper &middot; 0.56 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/GATE%20EC%202010-2024%20Paper%20Solution/2016/S3_EC.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="s4_ec.pdf solved question paper/gate ec 2010-2024 paper solution/2016/s4_ec.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">S4_EC.pdf</div>
+    <div class="path">Solved Question Paper/GATE EC 2010-2024 Paper Solution/2016/S4_EC.pdf &middot; Solved Paper &middot; 0.56 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/GATE%20EC%202010-2024%20Paper%20Solution/2016/S4_EC.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ec-2017-1.pdf solved question paper/gate ec 2010-2024 paper solution/2017/ec-2017-1.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">EC-2017-1.pdf</div>
+    <div class="path">Solved Question Paper/GATE EC 2010-2024 Paper Solution/2017/EC-2017-1.pdf &middot; Solved Paper &middot; 0.7 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/GATE%20EC%202010-2024%20Paper%20Solution/2017/EC-2017-1.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ec-2017-2.pdf solved question paper/gate ec 2010-2024 paper solution/2017/ec-2017-2.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">EC-2017-2.pdf</div>
+    <div class="path">Solved Question Paper/GATE EC 2010-2024 Paper Solution/2017/EC-2017-2.pdf &middot; Solved Paper &middot; 0.7 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/GATE%20EC%202010-2024%20Paper%20Solution/2017/EC-2017-2.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="gate-ec-2018-question-paper-solutions.pdf solved question paper/gate ec 2010-2024 paper solution/2018/gate-ec-2018-question-paper-solutions.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">gate-ec-2018-question-paper-solutions.pdf</div>
+    <div class="path">Solved Question Paper/GATE EC 2010-2024 Paper Solution/2018/gate-ec-2018-question-paper-solutions.pdf &middot; Solved Paper &middot; 0.75 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/GATE%20EC%202010-2024%20Paper%20Solution/2018/gate-ec-2018-question-paper-solutions.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ec_gate-2019.pdf solved question paper/gate ec 2010-2024 paper solution/2019/ec_gate-2019.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">EC_GATE-2019.pdf</div>
+    <div class="path">Solved Question Paper/GATE EC 2010-2024 Paper Solution/2019/EC_GATE-2019.pdf &middot; Solved Paper &middot; 7.26 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/GATE%20EC%202010-2024%20Paper%20Solution/2019/EC_GATE-2019.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ec_gate-2020_02-02-2020_final.pdf solved question paper/gate ec 2010-2024 paper solution/2020/ec_gate-2020_02-02-2020_final.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">EC_GATE-2020_02-02-2020_Final.pdf</div>
+    <div class="path">Solved Question Paper/GATE EC 2010-2024 Paper Solution/2020/EC_GATE-2020_02-02-2020_Final.pdf &middot; Solved Paper &middot; 6.6 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/GATE%20EC%202010-2024%20Paper%20Solution/2020/EC_GATE-2020_02-02-2020_Final.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ecgate-2021_originalpaper_revised.pdf solved question paper/gate ec 2010-2024 paper solution/2021/ecgate-2021_originalpaper_revised.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">ECGATE-2021_OriginalPaper_Revised.pdf</div>
+    <div class="path">Solved Question Paper/GATE EC 2010-2024 Paper Solution/2021/ECGATE-2021_OriginalPaper_Revised.pdf &middot; Solved Paper &middot; 11.63 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/GATE%20EC%202010-2024%20Paper%20Solution/2021/ECGATE-2021_OriginalPaper_Revised.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="gate-2022-paper-solution-(ec)-iesmaster.pdf solved question paper/gate ec 2010-2024 paper solution/2022/gate-2022-paper-solution-(ec)-iesmaster.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">GATE-2022-Paper-Solution-(EC)-IESMaster.pdf</div>
+    <div class="path">Solved Question Paper/GATE EC 2010-2024 Paper Solution/2022/GATE-2022-Paper-Solution-(EC)-IESMaster.pdf &middot; Solved Paper &middot; 2.39 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/GATE%20EC%202010-2024%20Paper%20Solution/2022/GATE-2022-Paper-Solution-%28EC%29-IESMaster.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="gate-2022-paper-solution-(ec)-madeeasy.pdf solved question paper/gate ec 2010-2024 paper solution/2022/gate-2022-paper-solution-(ec)-madeeasy.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">GATE-2022-Paper-Solution-(EC)-MadeEasy.pdf</div>
+    <div class="path">Solved Question Paper/GATE EC 2010-2024 Paper Solution/2022/GATE-2022-Paper-Solution-(EC)-MadeEasy.pdf &middot; Solved Paper &middot; 13.14 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/GATE%20EC%202010-2024%20Paper%20Solution/2022/GATE-2022-Paper-Solution-%28EC%29-MadeEasy.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="gate-2023-paper-solution-(ec)-byjus.pdf solved question paper/gate ec 2010-2024 paper solution/2023/gate-2023-paper-solution-(ec)-byjus.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">GATE-2023-Paper-Solution-(EC)-Byjus.pdf</div>
+    <div class="path">Solved Question Paper/GATE EC 2010-2024 Paper Solution/2023/GATE-2023-Paper-Solution-(EC)-Byjus.pdf &middot; Solved Paper &middot; 2.46 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/GATE%20EC%202010-2024%20Paper%20Solution/2023/GATE-2023-Paper-Solution-%28EC%29-Byjus.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="gate-2023-paper-solution-(ec)-madeeasy.pdf solved question paper/gate ec 2010-2024 paper solution/2023/gate-2023-paper-solution-(ec)-madeeasy.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">GATE-2023-Paper-Solution-(EC)-MadeEasy.pdf</div>
+    <div class="path">Solved Question Paper/GATE EC 2010-2024 Paper Solution/2023/GATE-2023-Paper-Solution-(EC)-MadeEasy.pdf &middot; Solved Paper &middot; 9.86 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/GATE%20EC%202010-2024%20Paper%20Solution/2023/GATE-2023-Paper-Solution-%28EC%29-MadeEasy.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="gate 2024.pdf solved question paper/gate ec 2010-2024 paper solution/2024/gate 2024.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">GATE 2024.pdf</div>
+    <div class="path">Solved Question Paper/GATE EC 2010-2024 Paper Solution/2024/GATE 2024.pdf &middot; Solved Paper &middot; 7.84 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/GATE%20EC%202010-2024%20Paper%20Solution/2024/GATE%202024.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="gate answer.pdf solved question paper/gate ec 2010-2024 paper solution/2024/gate answer.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">gate answer.pdf</div>
+    <div class="path">Solved Question Paper/GATE EC 2010-2024 Paper Solution/2024/gate answer.pdf &middot; Solved Paper &middot; 8.1 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/GATE%20EC%202010-2024%20Paper%20Solution/2024/gate%20answer.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="gate 2015.pdf solved question paper/madeeasy paper solution/gate 2015.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">Gate 2015.pdf</div>
+    <div class="path">Solved Question Paper/MadeEasy Paper Solution/Gate 2015.pdf &middot; Solved Paper &middot; 1.1 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/MadeEasy%20Paper%20Solution/Gate%202015.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="gate 2016.pdf solved question paper/madeeasy paper solution/gate 2016.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">Gate 2016.pdf</div>
+    <div class="path">Solved Question Paper/MadeEasy Paper Solution/Gate 2016.pdf &middot; Solved Paper &middot; 1.56 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/MadeEasy%20Paper%20Solution/Gate%202016.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="gate 2017.pdf solved question paper/madeeasy paper solution/gate 2017.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">Gate 2017.pdf</div>
+    <div class="path">Solved Question Paper/MadeEasy Paper Solution/Gate 2017.pdf &middot; Solved Paper &middot; 8.43 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/MadeEasy%20Paper%20Solution/Gate%202017.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="gate 2018(1).pdf solved question paper/madeeasy paper solution/gate 2018(1).pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">Gate 2018(1).pdf</div>
+    <div class="path">Solved Question Paper/MadeEasy Paper Solution/Gate 2018(1).pdf &middot; Solved Paper &middot; 1.0 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/MadeEasy%20Paper%20Solution/Gate%202018%281%29.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="gate 2018.pdf solved question paper/madeeasy paper solution/gate 2018.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">Gate 2018.pdf</div>
+    <div class="path">Solved Question Paper/MadeEasy Paper Solution/Gate 2018.pdf &middot; Solved Paper &middot; 0.75 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/MadeEasy%20Paper%20Solution/Gate%202018.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="gate 2019.pdf solved question paper/madeeasy paper solution/gate 2019.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">Gate 2019.pdf</div>
+    <div class="path">Solved Question Paper/MadeEasy Paper Solution/Gate 2019.pdf &middot; Solved Paper &middot; 7.26 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/MadeEasy%20Paper%20Solution/Gate%202019.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="gate 2020.pdf solved question paper/madeeasy paper solution/gate 2020.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">Gate 2020.pdf</div>
+    <div class="path">Solved Question Paper/MadeEasy Paper Solution/Gate 2020.pdf &middot; Solved Paper &middot; 6.63 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/MadeEasy%20Paper%20Solution/Gate%202020.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="gate 2021.pdf solved question paper/madeeasy paper solution/gate 2021.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">Gate 2021.pdf</div>
+    <div class="path">Solved Question Paper/MadeEasy Paper Solution/Gate 2021.pdf &middot; Solved Paper &middot; 11.64 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/MadeEasy%20Paper%20Solution/Gate%202021.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="gate 2022.pdf solved question paper/madeeasy paper solution/gate 2022.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">Gate 2022.pdf</div>
+    <div class="path">Solved Question Paper/MadeEasy Paper Solution/Gate 2022.pdf &middot; Solved Paper &middot; 3.48 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/MadeEasy%20Paper%20Solution/Gate%202022.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="gate 2023.pdf solved question paper/madeeasy paper solution/gate 2023.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">Gate 2023.pdf</div>
+    <div class="path">Solved Question Paper/MadeEasy Paper Solution/Gate 2023.pdf &middot; Solved Paper &middot; 13.71 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/MadeEasy%20Paper%20Solution/Gate%202023.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="gate 2024.pdf solved question paper/madeeasy paper solution/gate 2024.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">Gate 2024.pdf</div>
+    <div class="path">Solved Question Paper/MadeEasy Paper Solution/Gate 2024.pdf &middot; Solved Paper &middot; 5.33 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/MadeEasy%20Paper%20Solution/Gate%202024.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ec_electronic-devices.pdf solved question paper/solved papers/ec_electronic-devices.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">EC_Electronic-Devices.pdf</div>
+    <div class="path">Solved Question Paper/Solved Papers/EC_Electronic-Devices.pdf &middot; Solved Paper &middot; 0.36 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/Solved%20Papers/EC_Electronic-Devices.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ec_general-apitude.pdf solved question paper/solved papers/ec_general-apitude.pdf previous year / solved papers" data-category="Previous Year / Solved Papers">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">EC_General-Apitude.pdf</div>
+    <div class="path">Solved Question Paper/Solved Papers/EC_General-Apitude.pdf &middot; Solved Paper &middot; 0.11 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Solved%20Question%20Paper/Solved%20Papers/EC_General-Apitude.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+</details><details open data-section="Formula Book / Handbook">
+  <summary>Formula Book / Handbook <span>6 files</span></summary>
+  <div class="row" data-name="ece-formula-sheet.pdf handbook &amp; formula book/ece-formula-sheet.pdf formula book / handbook" data-category="Formula Book / Handbook">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">ece-formula-sheet.pdf</div>
+    <div class="path">Handbook &amp; Formula book/ece-formula-sheet.pdf &middot; Formula Book &middot; 1.19 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Handbook%20%26%20Formula%20book/ece-formula-sheet.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="gate ec formula book.pdf handbook &amp; formula book/gate ec formula book.pdf formula book / handbook" data-category="Formula Book / Handbook">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">GATE EC Formula Book.pdf</div>
+    <div class="path">Handbook &amp; Formula book/GATE EC Formula Book.pdf &middot; Formula Book &middot; 3.12 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Handbook%20%26%20Formula%20book/GATE%20EC%20Formula%20Book.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="ece-formula-sheet.pdf notes 📚/ace materials, formulas__wordpress/ece-formula-sheet.pdf formula book / handbook" data-category="Formula Book / Handbook">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">ece-formula-sheet.pdf</div>
+    <div class="path">Notes 📚/ACE MATERIALS, FORMULAS__WordPress/ece-formula-sheet.pdf &middot; Formula Book &middot; 1.19 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/ACE%20MATERIALS%2C%20FORMULAS__WordPress/ece-formula-sheet.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="electronic-devicescircuits.pdf notes 📚/ace materials, formulas__wordpress/electronic-devicescircuits.pdf formula book / handbook" data-category="Formula Book / Handbook">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">electronic-devicescircuits.pdf</div>
+    <div class="path">Notes 📚/ACE MATERIALS, FORMULAS__WordPress/electronic-devicescircuits.pdf &middot; Formula Book &middot; 1.79 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/ACE%20MATERIALS%2C%20FORMULAS__WordPress/electronic-devicescircuits.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="microwave-engineering-handwritten-lecture-notes-pdf-download_part_1.pdf notes 📚/ace materials, formulas__wordpress/gate notes-1/microwave-engineering-handwritten-lecture-notes-pdf-download_part_1.pdf formula book / handbook" data-category="Formula Book / Handbook">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">Microwave-Engineering-Handwritten-Lecture-Notes-PDF-Download_PART_1.pdf</div>
+    <div class="path">Notes 📚/ACE MATERIALS, FORMULAS__WordPress/GATE Notes-1/Microwave-Engineering-Handwritten-Lecture-Notes-PDF-Download_PART_1.pdf &middot; Formula Book &middot; 5.65 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/ACE%20MATERIALS%2C%20FORMULAS__WordPress/GATE%20Notes-1/Microwave-Engineering-Handwritten-Lecture-Notes-PDF-Download_PART_1.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="microwave-engineering-handwritten-lecture-notes-pdf-download_part_2.pdf notes 📚/ace materials, formulas__wordpress/gate notes-1/microwave-engineering-handwritten-lecture-notes-pdf-download_part_2.pdf formula book / handbook" data-category="Formula Book / Handbook">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">Microwave-Engineering-Handwritten-Lecture-Notes-PDF-Download_PART_2.pdf</div>
+    <div class="path">Notes 📚/ACE MATERIALS, FORMULAS__WordPress/GATE Notes-1/Microwave-Engineering-Handwritten-Lecture-Notes-PDF-Download_PART_2.pdf &middot; Formula Book &middot; 5.71 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/ACE%20MATERIALS%2C%20FORMULAS__WordPress/GATE%20Notes-1/Microwave-Engineering-Handwritten-Lecture-Notes-PDF-Download_PART_2.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+</details><details open data-section="Reference Books">
+  <summary>Reference Books <span>7 files</span></summary>
+  <div class="row" data-name="1-electronics_device__circuit.pdf notes 📚/made easy notes all subjects__wordpress/1-electronics_device__circuit.pdf reference books" data-category="Reference Books">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">1-electronics_device__circuit.pdf</div>
+    <div class="path">Notes 📚/MADE EASY NOTES ALL SUBJECTS__WordPress/1-electronics_device__circuit.pdf &middot; Reference Book &middot; 18.03 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/MADE%20EASY%20NOTES%20ALL%20SUBJECTS__WordPress/1-electronics_device__circuit.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="10-electrical_material.pdf notes 📚/made easy notes all subjects__wordpress/10-electrical_material.pdf reference books" data-category="Reference Books">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">10-electrical_material.pdf</div>
+    <div class="path">Notes 📚/MADE EASY NOTES ALL SUBJECTS__WordPress/10-electrical_material.pdf &middot; Reference Book &middot; 10.93 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/MADE%20EASY%20NOTES%20ALL%20SUBJECTS__WordPress/10-electrical_material.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="11-measurment-instrumentation.pdf notes 📚/made easy notes all subjects__wordpress/11-measurment-instrumentation.pdf reference books" data-category="Reference Books">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">11-measurment-instrumentation.pdf</div>
+    <div class="path">Notes 📚/MADE EASY NOTES ALL SUBJECTS__WordPress/11-measurment-instrumentation.pdf &middot; Reference Book &middot; 15.81 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/MADE%20EASY%20NOTES%20ALL%20SUBJECTS__WordPress/11-measurment-instrumentation.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="7-electromagnatic_theory.pdf notes 📚/made easy notes all subjects__wordpress/7-electromagnatic_theory.pdf reference books" data-category="Reference Books">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">7-electromagnatic_theory.pdf</div>
+    <div class="path">Notes 📚/MADE EASY NOTES ALL SUBJECTS__WordPress/7-electromagnatic_theory.pdf &middot; Reference Book &middot; 21.43 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/MADE%20EASY%20NOTES%20ALL%20SUBJECTS__WordPress/7-electromagnatic_theory.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="9-microprocessor-computer-organisation.pdf notes 📚/made easy notes all subjects__wordpress/9-microprocessor-computer-organisation.pdf reference books" data-category="Reference Books">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">9-microprocessor-computer-organisation.pdf</div>
+    <div class="path">Notes 📚/MADE EASY NOTES ALL SUBJECTS__WordPress/9-microprocessor-computer-organisation.pdf &middot; Reference Book &middot; 4.6 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/MADE%20EASY%20NOTES%20ALL%20SUBJECTS__WordPress/9-microprocessor-computer-organisation.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="[made easy] material science - electronics engineering gate handwritten notes pdf download.pdf notes 📚/made easy notes all subjects__wordpress/gate notes-2/[made easy] material science - electronics engineering gate handwritten notes pdf download.pdf reference books" data-category="Reference Books">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">[Made Easy] Material Science - Electronics Engineering Gate Handwritten Notes PDF Download.pdf</div>
+    <div class="path">Notes 📚/MADE EASY NOTES ALL SUBJECTS__WordPress/GATE Notes-2/[Made Easy] Material Science - Electronics Engineering Gate Handwritten Notes PDF Download.pdf &middot; Reference Book &middot; 11.63 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/MADE%20EASY%20NOTES%20ALL%20SUBJECTS__WordPress/GATE%20Notes-2/%5BMade%20Easy%5D%20Material%20Science%20-%20Electronics%20Engineering%20Gate%20Handwritten%20Notes%20PDF%20Download.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="[made easy] microwave engineering   electronics engineering gate handwritten notes pdf dow.pdf notes 📚/made easy notes all subjects__wordpress/gate notes-2/[made easy] microwave engineering - electronics engineering gate handwritten notes pdf download.pdf reference books" data-category="Reference Books">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">[Made Easy] Microwave Engineering   Electronics Engineering Gate Handwritten Notes PDF Dow.pdf</div>
+    <div class="path">Notes 📚/MADE EASY NOTES ALL SUBJECTS__WordPress/GATE Notes-2/[Made Easy] Microwave Engineering - Electronics Engineering Gate Handwritten Notes PDF Download.pdf &middot; Reference Book &middot; 8.88 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/MADE%20EASY%20NOTES%20ALL%20SUBJECTS__WordPress/GATE%20Notes-2/%5BMade%20Easy%5D%20Microwave%20Engineering%20-%20Electronics%20Engineering%20Gate%20Handwritten%20Notes%20PDF%20Download.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+</details><details open data-section="Image References">
+  <summary>Image References <span>11 files</span></summary>
+  <div class="row" data-name="1738681064358.jpg adhil/gate material [github]/1738681064358.jpg image references" data-category="Image References">
+  <div class="badge">JPG</div>
+  <div>
+    <div class="file-name">1738681064358.jpg</div>
+    <div class="path">Adhil/GATE Material [Github]/1738681064358.jpg &middot; Image Reference &middot; 1.78 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/GATE%20Material%20%5BGithub%5D/1738681064358.jpg" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="img-20240816-wa0000.jpg gate 2025/img-20240816-wa0000.jpg image references" data-category="Image References">
+  <div class="badge">JPG</div>
+  <div>
+    <div class="file-name">IMG-20240816-WA0000.jpg</div>
+    <div class="path">Gate 2025/IMG-20240816-WA0000.jpg &middot; Image Reference &middot; 0.1 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Gate%202025/IMG-20240816-WA0000.jpg" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="screenshot_2024-09-26-17-42-35-602_com.google.android.youtube-edit.jpg gate 2025/instructions/screenshot_2024-09-26-17-42-35-602_com.google.android.youtube-edit.jpg image references" data-category="Image References">
+  <div class="badge">JPG</div>
+  <div>
+    <div class="file-name">Screenshot_2024-09-26-17-42-35-602_com.google.android.youtube-edit.jpg</div>
+    <div class="path">Gate 2025/Instructions/Screenshot_2024-09-26-17-42-35-602_com.google.android.youtube-edit.jpg &middot; Image Reference &middot; 0.2 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Gate%202025/Instructions/Screenshot_2024-09-26-17-42-35-602_com.google.android.youtube-edit.jpg" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="screenshot_2024-09-26-17-43-06-802_com.google.android.youtube-edit.jpg gate 2025/instructions/screenshot_2024-09-26-17-43-06-802_com.google.android.youtube-edit.jpg image references" data-category="Image References">
+  <div class="badge">JPG</div>
+  <div>
+    <div class="file-name">Screenshot_2024-09-26-17-43-06-802_com.google.android.youtube-edit.jpg</div>
+    <div class="path">Gate 2025/Instructions/Screenshot_2024-09-26-17-43-06-802_com.google.android.youtube-edit.jpg &middot; Image Reference &middot; 0.29 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Gate%202025/Instructions/Screenshot_2024-09-26-17-43-06-802_com.google.android.youtube-edit.jpg" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="screenshot_2024-09-26-17-45-00-351_com.google.android.youtube-edit.jpg gate 2025/instructions/screenshot_2024-09-26-17-45-00-351_com.google.android.youtube-edit.jpg image references" data-category="Image References">
+  <div class="badge">JPG</div>
+  <div>
+    <div class="file-name">Screenshot_2024-09-26-17-45-00-351_com.google.android.youtube-edit.jpg</div>
+    <div class="path">Gate 2025/Instructions/Screenshot_2024-09-26-17-45-00-351_com.google.android.youtube-edit.jpg &middot; Image Reference &middot; 0.21 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Gate%202025/Instructions/Screenshot_2024-09-26-17-45-00-351_com.google.android.youtube-edit.jpg" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="screenshot_2024-09-26-17-46-51-189_com.google.android.youtube-edit.jpg gate 2025/instructions/screenshot_2024-09-26-17-46-51-189_com.google.android.youtube-edit.jpg image references" data-category="Image References">
+  <div class="badge">JPG</div>
+  <div>
+    <div class="file-name">Screenshot_2024-09-26-17-46-51-189_com.google.android.youtube-edit.jpg</div>
+    <div class="path">Gate 2025/Instructions/Screenshot_2024-09-26-17-46-51-189_com.google.android.youtube-edit.jpg &middot; Image Reference &middot; 0.22 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Gate%202025/Instructions/Screenshot_2024-09-26-17-46-51-189_com.google.android.youtube-edit.jpg" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="img-20240830-wa0004.jpg gate 2025/spectrum/img-20240830-wa0004.jpg image references" data-category="Image References">
+  <div class="badge">JPG</div>
+  <div>
+    <div class="file-name">IMG-20240830-WA0004.jpg</div>
+    <div class="path">Gate 2025/Spectrum/IMG-20240830-WA0004.jpg &middot; Image Reference &middot; 0.34 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Gate%202025/Spectrum/IMG-20240830-WA0004.jpg" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="img-20240911-wa0006.jpg gate 2025/spectrum/img-20240911-wa0006.jpg image references" data-category="Image References">
+  <div class="badge">JPG</div>
+  <div>
+    <div class="file-name">IMG-20240911-WA0006.jpg</div>
+    <div class="path">Gate 2025/Spectrum/IMG-20240911-WA0006.jpg &middot; Image Reference &middot; 0.13 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Gate%202025/Spectrum/IMG-20240911-WA0006.jpg" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="img-20240911-wa0019.jpg gate 2025/spectrum/img-20240911-wa0019.jpg image references" data-category="Image References">
+  <div class="badge">JPG</div>
+  <div>
+    <div class="file-name">IMG-20240911-WA0019.jpg</div>
+    <div class="path">Gate 2025/Spectrum/IMG-20240911-WA0019.jpg &middot; Image Reference &middot; 0.13 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Gate%202025/Spectrum/IMG-20240911-WA0019.jpg" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="img-20240911-wa0020.jpg gate 2025/spectrum/img-20240911-wa0020.jpg image references" data-category="Image References">
+  <div class="badge">JPG</div>
+  <div>
+    <div class="file-name">IMG-20240911-WA0020.jpg</div>
+    <div class="path">Gate 2025/Spectrum/IMG-20240911-WA0020.jpg &middot; Image Reference &middot; 0.17 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Gate%202025/Spectrum/IMG-20240911-WA0020.jpg" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="img-20240911-wa0021.jpg gate 2025/spectrum/img-20240911-wa0021.jpg image references" data-category="Image References">
+  <div class="badge">JPG</div>
+  <div>
+    <div class="file-name">IMG-20240911-WA0021.jpg</div>
+    <div class="path">Gate 2025/Spectrum/IMG-20240911-WA0021.jpg &middot; Image Reference &middot; 0.13 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Gate%202025/Spectrum/IMG-20240911-WA0021.jpg" target="_blank" rel="noopener">Open server file</a>
+</div>
+</details><details open data-section="Other EC Resources">
+  <summary>Other EC Resources <span>10 files</span></summary>
+  <div class="row" data-name="adhil gate.pdf adhil gate.pdf other ec resources" data-category="Other EC Resources">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">Adhil Gate.pdf</div>
+    <div class="path">Adhil Gate.pdf &middot; Study Notes &middot; 0.55 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil%20Gate.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="r214f19applicationform.pdf adhil/r214f19applicationform.pdf other ec resources" data-category="Other EC Resources">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">R214F19ApplicationForm.pdf</div>
+    <div class="path">Adhil/R214F19ApplicationForm.pdf &middot; Study Notes &middot; 0.9 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Adhil/R214F19ApplicationForm.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="gate eligibility list (1).pdf gate 2025/gate eligibility list (1).pdf other ec resources" data-category="Other EC Resources">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">GATE ELIGIBILITY LIST (1).pdf</div>
+    <div class="path">Gate 2025/GATE ELIGIBILITY LIST (1).pdf &middot; Study Notes &middot; 0.1 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Gate%202025/GATE%20ELIGIBILITY%20LIST%20%281%29.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="gate eligibility list (1).pdf gate 2025/spectrum/gate eligibility list (1).pdf other ec resources" data-category="Other EC Resources">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">GATE ELIGIBILITY LIST (1).pdf</div>
+    <div class="path">Gate 2025/Spectrum/GATE ELIGIBILITY LIST (1).pdf &middot; Study Notes &middot; 0.1 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Gate%202025/Spectrum/GATE%20ELIGIBILITY%20LIST%20%281%29.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="gate slot-2.pdf gate 2025/spectrum/gate slot-2.pdf other ec resources" data-category="Other EC Resources">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">GATE SLOT-2.pdf</div>
+    <div class="path">Gate 2025/Spectrum/GATE SLOT-2.pdf &middot; Study Notes &middot; 0.07 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Gate%202025/Spectrum/GATE%20SLOT-2.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="gate.pdf gate 2025/spectrum/gate.pdf other ec resources" data-category="Other EC Resources">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">gate.pdf</div>
+    <div class="path">Gate 2025/Spectrum/gate.pdf &middot; Study Notes &middot; 0.73 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Gate%202025/Spectrum/gate.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="gate _ec_2025_syllabus (1).pdf gate _ec_2025_syllabus (1).pdf other ec resources" data-category="Other EC Resources">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">GATE _EC_2025_Syllabus (1).pdf</div>
+    <div class="path">GATE _EC_2025_Syllabus (1).pdf &middot; Study Notes &middot; 0.2 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/GATE%20_EC_2025_Syllabus%20%281%29.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="gate _ec_2025_syllabus.pdf gate _ec_2025_syllabus.pdf other ec resources" data-category="Other EC Resources">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">GATE _EC_2025_Syllabus.pdf</div>
+    <div class="path">GATE _EC_2025_Syllabus.pdf &middot; Study Notes &middot; 0.2 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/GATE%20_EC_2025_Syllabus.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="iii-ece-b gate_25.pdf iii-ece-b gate_25.pdf other ec resources" data-category="Other EC Resources">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">III-ECE-B Gate_25.pdf</div>
+    <div class="path">III-ECE-B Gate_25.pdf &middot; Study Notes &middot; 0.06 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/III-ECE-B%20Gate_25.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+<div class="row" data-name="6.-electronic-devices-shortnotes-with-link.pdf notes 📚/gate wallah__pw/6.-electronic-devices-shortnotes-with-link.pdf other ec resources" data-category="Other EC Resources">
+  <div class="badge">PDF</div>
+  <div>
+    <div class="file-name">6.-Electronic-Devices-shortnotes-with-LINK.pdf</div>
+    <div class="path">Notes 📚/GATE Wallah__PW/6.-Electronic-Devices-shortnotes-with-LINK.pdf &middot; Study Notes &middot; 6.04 MB</div>
+  </div>
+  <a class="open" href="/rishi-practice-resources_ecgate/files/Notes%20%F0%9F%93%9A/GATE%20Wallah__PW/6.-Electronic-Devices-shortnotes-with-LINK.pdf" target="_blank" rel="noopener">Open server file</a>
+</div>
+</details>
+  <footer>Scoring rule: Percentage = correct attempted questions x 100 / valid questions. Valid questions exclude confirmed wrong/incomplete questions. Result: 60% or above = Pass; below 60% = Need Improvement.</footer>
+</main>
+<script>
+const q = document.getElementById('q');
+const category = document.getElementById('category');
+const rows = [...document.querySelectorAll('.row')];
+const sections = [...document.querySelectorAll('details')];
+function filterRows() {
+  const text = q.value.trim().toLowerCase();
+  const cat = category.value;
+  sections.forEach(section => {
+    let visible = 0;
+    section.querySelectorAll('.row').forEach(row => {
+      const okText = !text || row.dataset.name.includes(text);
+      const okCat = !cat || row.dataset.category === cat;
+      const show = okText && okCat;
+      row.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    section.style.display = visible ? '' : 'none';
+    if (text || cat) section.open = true;
+  });
+}
+q.addEventListener('input', filterRows);
+category.addEventListener('change', filterRows);
+</script>
 </body>
 </html>
